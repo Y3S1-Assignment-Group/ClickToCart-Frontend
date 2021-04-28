@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 
-class routes extends Component {
+class RoutesComponent extends Component {
   render() {
     return (
       <Router>
@@ -14,4 +14,4 @@ class routes extends Component {
   }
 }
 
-export default routes;
+export default RoutesComponent;
