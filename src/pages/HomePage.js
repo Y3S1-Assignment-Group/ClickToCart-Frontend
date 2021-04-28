@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Navbar from "../components/common/Navbar";
+import HomeHeroSection from "../modules/HomePageModules/HomeHeroSection/HomeHeroSection";
 import ShoppingCart from "../modules/HomePageModules/ShoppingCart/ShoppingCart";
 
 export class HomePage extends Component {
@@ -7,6 +8,7 @@ export class HomePage extends Component {
     return (
       <div>
         <Navbar />
+        <HomeHeroSection />
         <ShoppingCart />
       </div>
     );
