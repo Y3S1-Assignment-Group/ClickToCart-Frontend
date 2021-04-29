@@ -11,7 +11,7 @@ class RoutesComponent extends Component {
         <Switch>
           <Route path="/" exact component={HomePage} />
           <Route path="/explore" exact component={ExplorePage} />
-          <Route path="/viewitem" exact component={ViewItemPage} />
+          <Route path="/product/:id" exact component={ViewItemPage} />
         </Switch>
       </Router>
     );
