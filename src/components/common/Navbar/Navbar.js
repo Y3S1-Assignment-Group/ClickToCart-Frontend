@@ -1,12 +1,24 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import * as actions from "../../../actions/AuthActions";
 import "./Navbar.css";
 import HomeIcon from "@material-ui/icons/Home";
+import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import ExploreIcon from "@material-ui/icons/Explore";
 import LoginPage from "../../../pages/LoginPage";
 import RegisterPage from "../../../pages/RegisterPage";
 
 export class Navbar extends Component {
+  constructor(props) {
+    super(props);
+    this.logoutUserFunc = this.logoutUserFunc.bind(this);
+  }
+
+  logoutUserFunc() {
+    this.props.logoutUser();
+  }
+
   render() {
     return (
       <div>
@@ -67,13 +79,53 @@ export class Navbar extends Component {
               </li>
             </ul>
             <ul className="navbar-nav mr-auto navLinkTab mr-sm-2">
-              <li className="nav-item active p-2">
-                <LoginPage />
-              </li>
+              {this.props.isLoggedIn ? (
+                this.props.user.roles[0] === "ROLE_USER" ? (
+                  <li className="nav-item active p-2">
+                    <a
+                      className="nav-link navLinkTab"
+                      href="/profile"
+                      style={{ color: "#c4026d", fontSize: "20px" }}
+                    >
+                      <PeopleAltIcon />
+                      {this.props.user.username}
+                    </a>
+                  </li>
+                ) : (
+                  <li className="nav-item active p-2">
+                    <a
+                      className="nav-link navLinkTab"
+                      href="/dashboard"
+                      style={{ color: "#c4026d" }}
+                    >
+                      <PeopleAltIcon />
+                      {this.props.user.username}
+                    </a>
+                  </li>
+                )
+              ) : (
+                <>
+                  <li className="nav-item active p-2">
+                    <LoginPage />
+                  </li>
 
-              <li className="nav-item active p-2">
-                <RegisterPage />
-              </li>
+                  <li className="nav-item active p-2">
+                    <RegisterPage />
+                  </li>
+                </>
+              )}
+              {this.props.isLoggedIn ? (
+                <button
+                  className="btn btn-sm bg-transparent"
+                  onClick={this.logoutUserFunc}
+                >
+                  <span className="bg-danger p-2 text-white rounded">
+                    Logout
+                  </span>
+                </button>
+              ) : (
+                ""
+              )}
             </ul>
           </div>
         </nav>
@@ -82,4 +134,13 @@ export class Navbar extends Component {
   }
 }
 
-export default Navbar;
+const mapStateToProps = (state) => ({
+  user: state.authReducer.user,
+  isLoggedIn: state.authReducer.isLoggedIn,
+});
+
+const mapActionToProps = {
+  logoutUser: actions.logout,
+};
+
+export default connect(mapStateToProps, mapActionToProps)(Navbar);
