@@ -84,7 +84,7 @@ class SingleItemView extends Component {
             </div>
             <div className="row mb-2">
               <div className="col-lg-3 col-md-3 col-sm-3 text-muted">Price</div>
-              <div className="col-lg-8 col-md-8 col-sm-8 text-left">RS.120,00.00</div>
+              <div className="col-lg-8 col-md-8 col-sm-8 text-left">RS.130,00.00</div>
             </div>
             <div className="row mb-2">
               <div className="col-lg-3 col-md-3 col-sm-3 text-muted">Description</div>
