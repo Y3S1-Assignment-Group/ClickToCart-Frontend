@@ -83,6 +83,10 @@ class SingleItemView extends Component {
               <div className="col-lg-8 col-md-8 col-sm-8 text-left">Laser Mobile</div>
             </div>
             <div className="row mb-2">
+              <div className="col-lg-3 col-md-3 col-sm-3 text-muted">Price</div>
+              <div className="col-lg-8 col-md-8 col-sm-8 text-left">RS.130,00.00</div>
+            </div>
+            <div className="row mb-2">
               <div className="col-lg-3 col-md-3 col-sm-3 text-muted">Description</div>
               <div className="col-lg-8 col-md-8 col-sm-8 text-left">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book</div>
             </div>
