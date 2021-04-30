@@ -70,7 +70,7 @@ export class Navbar extends Component {
               <li className="nav-item active">
                 <a
                   className="nav-link navLinkTab"
-                  href="/"
+                  href="/cart"
                   style={{ color: "#c4026d" }}
                 >
                   <ShoppingCartIcon />
