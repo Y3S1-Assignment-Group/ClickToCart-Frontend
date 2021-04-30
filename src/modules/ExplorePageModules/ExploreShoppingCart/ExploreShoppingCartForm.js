@@ -1,18 +1,84 @@
 import React, { Component } from "react";
 import LogoImg from "../../../assets/img/HomePage/logo.png";
+import { connect } from "react-redux";
+import * as actions from "../../../actions/ItemActions";
 
 class ExploreShoppingCartForm extends Component {
   constructor(props) {
     super(props);
+    this.onValueChange = this.onValueChange.bind(this);
+    this.checkProducts = this.checkProducts.bind(this);
     this.state = {
+      all: "",
       price: 0,
+      name: "",
+      ram: 0,
+      brand: "",
     };
+  }
+
+  checkProducts(list) {
+    if (
+      (this.state.ram !== 0 &&
+        this.state.price !== 0 &&
+        this.state.brand !== "") ||
+      (this.state.price !== 0 &&
+        this.state.ram !== 0 &&
+        this.state.brand !== "") ||
+      (this.state.brand !== "" &&
+        this.state.price !== 0 &&
+        this.state.ram !== 0) ||
+      (this.state.brand !== "" &&
+        this.state.ram !== 0 &&
+        this.state.price !== 0) ||
+      (this.state.ram !== 0 &&
+        this.state.brand !== "" &&
+        this.state.price !== 0) ||
+      (this.state.price !== 0 &&
+        this.state.brand !== "" &&
+        this.state.ram !== 0) ||
+      (this.state.ram !== 0 &&
+        this.state.brand !== "" &&
+        this.state.price !== 0)
+    ) {
+      return (
+        list.ram == this.state.ram &&
+        list.price <= this.state.price &&
+        list.brand.toLowerCase() == this.state.brand.toLowerCase()
+      );
+    } else if (this.state.ram !== 0 && this.state.price !== 0) {
+      return list.ram == this.state.ram && list.price <= this.state.price;
+    } else if (this.state.ram !== 0 && this.state.brand !== "") {
+      return (
+        list.ram == this.state.ram &&
+        list.brand.toLowerCase() == this.state.brand.toLowerCase()
+      );
+    } else if (this.state.price !== 0 && this.state.brand !== "") {
+      return (
+        list.brand.toLowerCase() == this.state.brand.toLowerCase() &&
+        list.price <= this.state.price
+      );
+    } else if (this.state.ram !== 0) {
+      return list.ram == this.state.ram;
+    } else if (this.state.price !== 0) {
+      return list.price <= this.state.price;
+    } else if (this.state.brand !== "") {
+      return list.brand.toLowerCase() == this.state.brand.toLowerCase();
+    } else {
+      return list;
+    }
+  }
+
+  async onValueChange(e) {
+    await this.setState({ [e.target.name]: e.target.value });
+
+    this.props.filterAllItems(this.props.itemList.filter(this.checkProducts));
   }
 
   render() {
     return (
       <div>
-        <div className="text-center">
+        <div className="text-center" style={{ backgroundColor: "#f0f0f0" }}>
           <img
             src={LogoImg}
             alt="logo"
@@ -20,31 +86,40 @@ class ExploreShoppingCartForm extends Component {
           />
         </div>
         <form className="mt-3">
-          <div className="mb-3">
-            <input type="text" className="form-control" placeholder="search" />
-          </div>
-
           {/* Categories Radio Button */}
           <div className="mb-3">
+            <button
+              className="btn btn-secondary btn-sm"
+              onClick={(e) => {
+                e.preventDefault();
+                this.props.filterAllItems(this.props.itemList);
+              }}
+            >
+              ALL
+            </button>
+          </div>
+
+          <hr />
+          <div className="mb-3">
+            <label
+              for="customRange1"
+              className="form-label"
+              style={{ fontWeight: "bold" }}
+            >
+              BRAND
+            </label>
             <div className="form-check">
               <input
                 className="form-check-input"
                 type="radio"
-                name="flexRadioDefault"
-                id="flexRadioDefault1"
+                name="brand"
+                value="APPLE"
+                id="brand1"
+                onChange={(e) => {
+                  this.onValueChange(e);
+                }}
               />
-              <label className="form-check-label" for="flexRadioDefault1">
-                ALL
-              </label>
-            </div>
-            <div className="form-check">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="flexRadioDefault"
-                id="flexRadioDefault1"
-              />
-              <label className="form-check-label" for="flexRadioDefault1">
+              <label className="form-check-label" for="brand1">
                 APPLE
               </label>
             </div>
@@ -52,10 +127,14 @@ class ExploreShoppingCartForm extends Component {
               <input
                 className="form-check-input"
                 type="radio"
-                name="flexRadioDefault"
-                id="flexRadioDefault1"
+                name="brand"
+                value="SAMSUNG"
+                id="brand1"
+                onChange={(e) => {
+                  this.onValueChange(e);
+                }}
               />
-              <label className="form-check-label" for="flexRadioDefault1">
+              <label className="form-check-label" for="brand1">
                 SAMSUNG
               </label>
             </div>
@@ -63,10 +142,14 @@ class ExploreShoppingCartForm extends Component {
               <input
                 className="form-check-input"
                 type="radio"
-                name="flexRadioDefault"
-                id="flexRadioDefault1"
+                name="brand"
+                value="NOKIA"
+                id="brand1"
+                onChange={(e) => {
+                  this.onValueChange(e);
+                }}
               />
-              <label className="form-check-label" for="flexRadioDefault1">
+              <label className="form-check-label" for="brand1">
                 NOKIA
               </label>
             </div>
@@ -74,10 +157,14 @@ class ExploreShoppingCartForm extends Component {
               <input
                 className="form-check-input"
                 type="radio"
-                name="flexRadioDefault"
-                id="flexRadioDefault1"
+                name="brand"
+                value="OPPO"
+                id="brand1"
+                onChange={(e) => {
+                  this.onValueChange(e);
+                }}
               />
-              <label className="form-check-label" for="flexRadioDefault1">
+              <label className="form-check-label" for="brand1">
                 OPPO
               </label>
             </div>
@@ -85,11 +172,15 @@ class ExploreShoppingCartForm extends Component {
               <input
                 className="form-check-input"
                 type="radio"
-                name="flexRadioDefault"
-                id="flexRadioDefault1"
+                name="brand"
+                value="Huawei"
+                id="brand1"
+                onChange={(e) => {
+                  this.onValueChange(e);
+                }}
               />
-              <label className="form-check-label" for="flexRadioDefault1">
-                Huwawei
+              <label className="form-check-label" for="brand1">
+                Huawei
               </label>
             </div>
           </div>
@@ -103,6 +194,7 @@ class ExploreShoppingCartForm extends Component {
               Price <span id="demo"> 0 LKR - {this.state.price}</span> LKR
             </label>
             <input
+              name="price"
               type="range"
               className="form-range"
               value={this.state.price}
@@ -111,7 +203,7 @@ class ExploreShoppingCartForm extends Component {
               step="100"
               id="customRange1"
               onChange={(e) => {
-                this.setState({ price: e.target.value });
+                this.onValueChange(e);
               }}
             />
           </div>
@@ -125,25 +217,19 @@ class ExploreShoppingCartForm extends Component {
             >
               RAM
             </label>
+
             <div className="form-check">
               <input
                 className="form-check-input"
                 type="radio"
-                name="flexRadioDefault"
-                id="flexRadioDefault1"
+                name="ram"
+                value="1"
+                id="ram1"
+                onChange={(e) => {
+                  this.onValueChange(e);
+                }}
               />
-              <label className="form-check-label" for="flexRadioDefault1">
-                ALL
-              </label>
-            </div>
-            <div className="form-check">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="flexRadioDefault"
-                id="flexRadioDefault1"
-              />
-              <label className="form-check-label" for="flexRadioDefault1">
+              <label className="form-check-label" for="ram1">
                 1 GB
               </label>
             </div>
@@ -151,10 +237,14 @@ class ExploreShoppingCartForm extends Component {
               <input
                 className="form-check-input"
                 type="radio"
-                name="flexRadioDefault"
-                id="flexRadioDefault1"
+                name="ram"
+                value="2"
+                id="ram1"
+                onChange={(e) => {
+                  this.onValueChange(e);
+                }}
               />
-              <label className="form-check-label" for="flexRadioDefault1">
+              <label className="form-check-label" for="ram1">
                 2 GB
               </label>
             </div>
@@ -162,10 +252,14 @@ class ExploreShoppingCartForm extends Component {
               <input
                 className="form-check-input"
                 type="radio"
-                name="flexRadioDefault"
-                id="flexRadioDefault1"
+                name="ram"
+                value="3"
+                id="ram1"
+                onChange={(e) => {
+                  this.onValueChange(e);
+                }}
               />
-              <label className="form-check-label" for="flexRadioDefault1">
+              <label className="form-check-label" for="ram1">
                 3 GB
               </label>
             </div>
@@ -173,10 +267,14 @@ class ExploreShoppingCartForm extends Component {
               <input
                 className="form-check-input"
                 type="radio"
-                name="flexRadioDefault"
-                id="flexRadioDefault1"
+                name="ram"
+                value="4"
+                id="ram1"
+                onChange={(e) => {
+                  this.onValueChange(e);
+                }}
               />
-              <label className="form-check-label" for="flexRadioDefault1">
+              <label className="form-check-label" for="ram1">
                 4 GB
               </label>
             </div>
@@ -184,10 +282,14 @@ class ExploreShoppingCartForm extends Component {
               <input
                 className="form-check-input"
                 type="radio"
-                name="flexRadioDefault"
-                id="flexRadioDefault1"
+                name="ram"
+                value="6"
+                id="ram1"
+                onChange={(e) => {
+                  this.onValueChange(e);
+                }}
               />
-              <label className="form-check-label" for="flexRadioDefault1">
+              <label className="form-check-label" for="ram1">
                 6 GB
               </label>
             </div>
@@ -198,4 +300,15 @@ class ExploreShoppingCartForm extends Component {
   }
 }
 
-export default ExploreShoppingCartForm;
+const mapStateToProps = (state) => ({
+  itemList: state.itemReducer.itemList,
+});
+
+const mapActionToProps = {
+  filterAllItems: actions.filterAllItems,
+};
+
+export default connect(
+  mapStateToProps,
+  mapActionToProps
+)(ExploreShoppingCartForm);
