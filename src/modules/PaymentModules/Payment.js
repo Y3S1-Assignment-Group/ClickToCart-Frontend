@@ -5,8 +5,9 @@ import axios from "axios";
 export default class Payment extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { amount: 120 };
+
     this.onChange = this.onChange.bind(this);
+    this.handleToken = this.handleToken.bind(this);
   }
 
   onChange(e) {
@@ -17,12 +18,12 @@ export default class Payment extends React.Component {
     console.log({ token, address });
     await axios
       .post(
-        "http://localhost:8080/payment/charge",
+        process.env.REACT_APP_BACKEND_URL + "/api/payment/charge",
         {},
         {
           headers: {
             token: token.id,
-            amount: 120,
+            amount: this.props.totalAmount,
           },
         }
       )

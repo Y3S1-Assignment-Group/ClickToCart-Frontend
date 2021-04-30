@@ -1,5 +1,11 @@
 a {
-  color: white;
+  text-decoration: none;
+  color: aliceblue;
+}
+
+a:hover {
+  text-decoration: none;
+  color: aliceblue;
 }
 
 .model-content {

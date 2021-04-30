@@ -58,41 +58,41 @@ class UserLogin extends Component {
         <div>
           <div className="container">
             <form onSubmit={this.onLogin}>
-              <div class="form-group formDiv">
+              <div className="form-group formDiv">
                 {this.state.processStatus ? (
-                  <div class={this.state.processStatusAlert} role="alert">
+                  <div className={this.state.processStatusAlert} role="alert">
                     {this.state.processStatusMessage}
                   </div>
                 ) : (
                   ""
                 )}
               </div>
-              <div class="form-group formDiv">
+              <div className="form-group formDiv">
                 <label>Username</label>
                 <input
                   type="text"
                   name="username"
-                  class="form-control"
+                  className="form-control"
                   placeholder="Enter username"
                   onChange={(e) => {
                     this.onValueChange(e);
                   }}
                 />
               </div>
-              <div class="form-group formDiv">
+              <div className="form-group formDiv">
                 <label>Password</label>
                 <input
                   type="password"
                   name="password"
-                  class="form-control"
+                  className="form-control"
                   placeholder="Password"
                   onChange={(e) => {
                     this.onValueChange(e);
                   }}
                 />
               </div>
-              <div class="form-group formDiv">
-                <button type="submit" class="btn btn-warning">
+              <div className="form-group formDiv">
+                <button type="submit" className="btn btn-warning">
                   LOGIN
                 </button>
               </div>
