@@ -5,6 +5,14 @@ export const ACTION_TYPES = {
   UPDATE_ITEM: "UPDATE_ITEM",
   DELETE_ITEM: "DELETE_ITEM",
   FETCH_ALL_ITEMS: "FETCH_ALL_ITEMS",
+  FETCH_FILTER_ITEMS: "FETCH_FILTER_ITEMS",
+};
+
+export const filterAllItems = (data) => (dispatch) => {
+  dispatch({
+    type: ACTION_TYPES.FETCH_FILTER_ITEMS,
+    payload: data,
+  });
 };
 
 export const fetchAllItems = () => (dispatch) => {

@@ -15,7 +15,7 @@ class ExploreShoppingCartList extends Component {
     return (
       <div>
         <div className="row mb-5">
-          {this.props.itemList.map((item) => {
+          {this.props.filterItemList.map((item) => {
             return (
               <div className="col-lg-3 col-md-4 col-sm-12 p-3 ShoppingCartSingleItemCol">
                 <Link to={`/product/${item.id}`}>
@@ -52,7 +52,7 @@ class ExploreShoppingCartList extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  itemList: state.itemReducer.itemList,
+  filterItemList: state.itemReducer.filterItemList,
 });
 
 const mapActionToProps = {
