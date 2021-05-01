@@ -3,6 +3,7 @@ import api from "../apis/CartAPI";
 export const ACTION_TYPES = {
     ADD_ITEM_TO_CART: "ADD_ITEM_TO_CART",
     GET_ITEM_FROM_CART: "GET_ITEM_FROM_CART",
+    DELETE_ITEM_FROM_CART: "DELETE_ITEM_FROM_CART",
   };
 
   export const addItemToCart = (data,onSuccess,onFailure) => (dispatch) => {
@@ -34,5 +35,21 @@ export const ACTION_TYPES = {
       })
       .catch(() => {
 
+      });
+  };
+
+  export const deleteItemFromCart = (id, onSuccess, onFailure) => (dispatch) => {
+    api
+      .cartItems()
+      .deleteCartItem(id)
+      .then(() => {
+        dispatch({
+          type: ACTION_TYPES.DELETE_ITEM_FROM_CART,
+          payload: { id },
+        });
+        onSuccess();
+      })
+      .catch(() => {
+        onFailure();
       });
   };

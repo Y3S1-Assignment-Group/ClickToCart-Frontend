@@ -7,11 +7,26 @@ import * as actions from "../../actions/CartActions";
 export class MyCart extends Component {
   constructor(props) {
     super(props);
+    this.deleteItemFromCartFunc = this.deleteItemFromCartFunc.bind(this);
     this.state = {};
   }
 
   componentDidMount() {
     this.props.getItemFromCart(this.props.user.id);
+    this.props.deleteItemFromCart(this.props.cartId, ()=>{
+
+    },()=>{
+
+    });
+  }
+
+  deleteItemFromCartFunc(id) {
+
+    this.props.deleteItemFromCart(id,
+      () => {
+      },
+      () => {
+      });
   }
 
   render() {
@@ -35,7 +50,7 @@ export class MyCart extends Component {
                         <td>{cartItem.qty}</td>
                         <td>{cartItem.totalPrice}</td>
                         <td>
-                          <button className="btn btn-danger btn-sm">
+                          <button className="btn btn-danger btn-sm" onClick={()=>this.deleteItemFromCartFunc(cartItem.id)}>
                             <HighlightOffIcon />
                           </button>
                         </td>
@@ -83,6 +98,7 @@ const mapStateToProps = (state) => ({
 
 const mapActionToProps = {
   getItemFromCart: actions.getItemFromCart,
+  deleteItemFromCart: actions.deleteItemFromCart,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(MyCart);
