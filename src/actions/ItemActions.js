@@ -6,6 +6,7 @@ export const ACTION_TYPES = {
   DELETE_ITEM: "DELETE_ITEM",
   FETCH_ALL_ITEMS: "FETCH_ALL_ITEMS",
   FETCH_FILTER_ITEMS: "FETCH_FILTER_ITEMS",
+  FETCH_ITEM_BY_ID: "FETCH_ITEM_BY_ID"
 };
 
 export const filterAllItems = (data) => (dispatch) => {
@@ -22,6 +23,18 @@ export const fetchAllItems = () => (dispatch) => {
     .then((response) => {
       dispatch({
         type: ACTION_TYPES.FETCH_ALL_ITEMS,
+        payload: response.data,
+      });
+    })
+    .catch(() => {});
+};
+
+export const fetchItemById = (id) => (dispatch) => {
+  api
+    .items().fetchById(id)
+    .then((response) => {
+      dispatch({
+        type: ACTION_TYPES.FETCH_ITEM_BY_ID,
         payload: response.data,
       });
     })
