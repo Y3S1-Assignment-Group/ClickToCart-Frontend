@@ -174,7 +174,12 @@ class SingleItemView extends Component {
                   -
                 </button>
               </div>
-              <div className="col-sm-6 mt-3">Quantity: {this.state.qty}</div>
+              <div className="col-sm-6 mt-3">
+                <h5>
+                  Quantity:{" "}
+                  <span className="font-weight-bold">{this.state.qty}</span>{" "}
+                </h5>
+              </div>
             </div>
           </div>
         </div>
