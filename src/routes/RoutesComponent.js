@@ -13,7 +13,7 @@ class RoutesComponent extends Component {
           <Route path="/" exact component={HomePage} />
           <Route path="/cart" exact component={MyCartPage} />
           <Route path="/explore" exact component={ExplorePage} />
-          <Route path="/product/:id" exact component={ViewItemPage} />
+          <Route path="/product/:productid" exact component={ViewItemPage} />
         </Switch>
       </Router>
     );
