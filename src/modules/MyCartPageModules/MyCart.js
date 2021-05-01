@@ -3,33 +3,16 @@ import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import Payment from "../PaymentModules/Payment";
 import { connect } from "react-redux";
 import * as actions from "../../actions/CartActions";
-import { Link } from "react-router-dom";
 
 export class MyCart extends Component {
   constructor(props) {
     super(props);
-    this.calculateTotalAmount = this.calculateTotalAmount.bind(this)
-    this.state = {
-      totalAmount: 0,
-    };
+    this.state = {};
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.getItemFromCart(this.props.user.id);
   }
-
-  calculateTotalAmount(){
-
-    let total = 0;
-
-    this.props.cartList.forEach((cartItem)=>{
-      total = total + cartItem.totalPrice
-    })
-
-    return total;
-
-  }
-
 
   render() {
     return (
@@ -45,35 +28,46 @@ export class MyCart extends Component {
                   <th scope="col"></th>
                 </thead>
                 <tbody>
-                 { this.props.cartList.map(cartItem=>{
-                   return(
-                    <tr>
-                    <td>{cartItem.itemName}</td>
-                    <td>{cartItem.qty}</td>
-                    <td>{cartItem.totalPrice}</td>
-                    <td>
-                      <button className="btn btn-danger btn-sm">
-                        <HighlightOffIcon />
-                      </button>
-                    </td>
-                  </tr>
-                   )
-                 })}
-    
-     
+                  {this.props.cartList.map((cartItem) => {
+                    return (
+                      <tr>
+                        <td>{cartItem.itemName}</td>
+                        <td>{cartItem.qty}</td>
+                        <td>{cartItem.totalPrice}</td>
+                        <td>
+                          <button className="btn btn-danger btn-sm">
+                            <HighlightOffIcon />
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })}
+
                   <tr>
                     <td></td>
                     <td>
                       <h5 className="font-weight-bold">Total</h5>
                     </td>
                     <td>
-                      <h5 className="font-weight-bold">{this.state.totalAmount}USD </h5>
+                      <h5 className="font-weight-bold">
+                        {this.props.cartList.reduce(
+                          (accumulator, current) =>
+                            accumulator + current.totalPrice,
+                          0
+                        )}
+                        USD
+                      </h5>
                     </td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
-              <Payment totalAmount={this.state.totalAmount} />
+              <Payment
+                totalAmount={this.props.cartList.reduce(
+                  (accumulator, current) => accumulator + current.totalPrice,
+                  0
+                )}
+              />
             </div>
           </table>
         </div>
@@ -84,14 +78,11 @@ export class MyCart extends Component {
 
 const mapStateToProps = (state) => ({
   cartList: state.cartReducer.cartList,
-  user:state.authReducer.user
+  user: state.authReducer.user,
 });
 
 const mapActionToProps = {
   getItemFromCart: actions.getItemFromCart,
 };
 
-export default connect(
-  mapStateToProps,
-  mapActionToProps
-)(MyCart);
+export default connect(mapStateToProps, mapActionToProps)(MyCart);

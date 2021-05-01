@@ -24,6 +24,7 @@ export default class Payment extends React.Component {
           headers: {
             token: token.id,
             amount: this.props.totalAmount,
+            userid: this.props.user,
           },
         }
       )
