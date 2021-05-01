@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import Navbar from "../components/common/Navbar";
+import Navbar from "../components/common/Navbar/Navbar";
 import HomeHeroSection from "../modules/HomePageModules/HomeHeroSection/HomeHeroSection";
 import ShoppingCart from "../modules/HomePageModules/ShoppingCart/ShoppingCart";
+import Footer from "../components/common/Footer/Footer";
 
 export class HomePage extends Component {
   render() {
@@ -10,6 +11,7 @@ export class HomePage extends Component {
         <Navbar />
         <HomeHeroSection />
         <ShoppingCart />
+        <Footer />
       </div>
     );
   }
