@@ -42,28 +42,30 @@ class ExploreShoppingCartForm extends Component {
         this.state.price !== 0)
     ) {
       return (
-        list.ram == this.state.ram &&
+        list.ram === parseInt(this.state.ram) &&
         list.price <= this.state.price &&
-        list.brand.toLowerCase() == this.state.brand.toLowerCase()
+        list.brand.toLowerCase() === this.state.brand.toLowerCase()
       );
     } else if (this.state.ram !== 0 && this.state.price !== 0) {
-      return list.ram == this.state.ram && list.price <= this.state.price;
+      return (
+        list.ram === parseInt(this.state.ram) && list.price <= this.state.price
+      );
     } else if (this.state.ram !== 0 && this.state.brand !== "") {
       return (
-        list.ram == this.state.ram &&
-        list.brand.toLowerCase() == this.state.brand.toLowerCase()
+        list.ram === parseInt(this.state.ram) &&
+        list.brand.toLowerCase() === this.state.brand.toLowerCase()
       );
     } else if (this.state.price !== 0 && this.state.brand !== "") {
       return (
-        list.brand.toLowerCase() == this.state.brand.toLowerCase() &&
+        list.brand.toLowerCase() === this.state.brand.toLowerCase() &&
         list.price <= this.state.price
       );
     } else if (this.state.ram !== 0) {
-      return list.ram == this.state.ram;
+      return list.ram === parseInt(this.state.ram);
     } else if (this.state.price !== 0) {
       return list.price <= this.state.price;
     } else if (this.state.brand !== "") {
-      return list.brand.toLowerCase() == this.state.brand.toLowerCase();
+      return list.brand.toLowerCase() === this.state.brand.toLowerCase();
     } else {
       return list;
     }
