@@ -33,7 +33,14 @@ export class MyCart extends Component {
     return (
       <div>
         <div className="card p-5">
-          <table className="table table-md ">
+          {this.props.cartList.length === 0 ? (
+            <div className="alert alert-danger mt-2 mb-2" role="alert">
+              No items available in the cart
+            </div>
+          ) : (
+            ""
+          )}
+          <table className="table table-md table-responsive">
             <div className="table-responsive">
               <table className="table align-middle">
                 <thead>
@@ -78,6 +85,7 @@ export class MyCart extends Component {
                 </tbody>
               </table>
               <Payment
+                userID={this.props.user.id}
                 totalAmount={this.props.cartList.reduce(
                   (accumulator, current) => accumulator + current.totalPrice,
                   0
