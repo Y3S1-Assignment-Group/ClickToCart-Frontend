@@ -3,6 +3,7 @@ import { ACTION_TYPES } from "../actions/ItemActions";
 const initialState = {
   itemList: [],
   filterItemList: [],
+  singleItem:"",
   newItem: "",
   updatedItem: "",
   deletedItem: "",
@@ -16,6 +17,11 @@ export const itemReducer = (state = initialState, action) => {
         itemList: [...action.payload],
         filterItemList: [...action.payload],
       };
+    case ACTION_TYPES.FETCH_ITEM_BY_ID:
+        return {
+          ...state,
+          singleItem: action.payload,
+        };
     case ACTION_TYPES.FETCH_FILTER_ITEMS:
       return {
         ...state,
