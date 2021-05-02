@@ -1,71 +1,182 @@
 import React, {Component} from 'react';
-import Navbar from "../components/common/Navbar";
+import { connect } from "react-redux";
+import * as actions from "../actions/ItemActions";
+import Navbar from "../components/common/Navbar/Navbar";
+import Footer from "../components/common/Footer/Footer";
+import * as cartActions from "../actions/CartActions";
+
 
 class AdminAddItemsPage extends Component {
-    render() {
+    constructor(props) {
+        super(props);
+        this.onValueChange = this.onValueChange.bind(this)
+        this.onAddItem = this.onAddItem.bind(this)
+
+        this.state = {
+            name:"",
+            brand:"",
+            ram:"",
+            storage:"",
+            price:"",
+            description:"",
+            imgLink:"",
+            stock:"",
+            processStatus: false,
+            processStatusAlert: "",
+            processStatusMessage: "",
+        }
+    };
+
+    onValueChange(e) {
+        this.setState({ [e.target.name]: e.target.value });
+    }
+
+    onAddItem(e) {
+        e.preventDefault();
+
+        this.setState({
+            processStatus: true,
+            processStatusAlert: "alert alert-warning",
+            processStatusMessage: "Please Wait...",
+        });
+
+        const newItem = {
+            name:this.state.name,
+            brand:this.state.brand,
+            ram:this.state.ram,
+            storage:this.state.storage,
+            price:this.state.price,
+            description:this.state.description,
+            imgLink:this.state.imgLink,
+            stock:this.state.stock,
+            user:{id:this.props.user.id},
+            sellarName:this.props.user.username
+        };
+
+        this.props.addItem(
+            newItem,
+            () => {
+                this.setState({
+                    processStatusAlert: "alert alert-success",
+                    processStatusMessage: "Account created successfully",
+                });
+                window.location = "/admin"
+            },
+            () => {
+                this.setState({
+                    processStatusAlert: "alert alert-danger",
+                    processStatusMessage:
+                        "Something went wrong. Please try again with different username",
+                });
+            }
+        );
+    }
+
+    render(){
         return (
             <div>
                 <Navbar/>
                 <div className="card m-4">
                     <div className="card-body">
-                        <form>
+                        <form onSubmit={this.onAddItem}>
                             <div className="form-row">
                                 <div className="form-group col-md-6">
-                                    <label htmlFor="inputEmail4">Email</label>
-                                    <input type="email" className="form-control" id="inputEmail4" placeholder="Email"/>
-                                </div>
-                                <div className="form-group col-md-6">
-                                    <label htmlFor="inputPassword4">Password</label>
-                                    <input type="password" className="form-control" id="inputPassword4" placeholder="Password"/>
-                                </div>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="inputAddress">Address</label>
-                                <input type="text" className="form-control" id="inputAddress" placeholder="1234 Main St"/>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="inputAddress2">Address 2</label>
-                                <input type="text" className="form-control" id="inputAddress2"
-                                       placeholder="Apartment, studio, or floor"/>
-                            </div>
-                            <div className="form-row">
-                                <div className="form-group col-md-6">
-                                    <label htmlFor="inputCity">City</label>
-                                    <input type="text" className="form-control" id="inputCity"/>
+                                    <label >Name</label>
+                                    <input type="text" name="name" className="form-control"  placeholder="Name"
+                                           onChange={(e) => {
+                                               this.onValueChange(e);
+                                           }}
+                                    />
                                 </div>
                                 <div className="form-group col-md-4">
-                                    <label htmlFor="inputState">State</label>
-                                    <select id="inputState" className="form-control">
+                                    <label >Brand</label>
+                                    <select id="inputState" name="brand" className="form-control"
+                                            onChange={(e) => {
+                                                this.onValueChange(e);
+                                            }}
+                                    >
                                         <option selected>Choose...</option>
-                                        <option>...</option>
+                                        <option value="Samsung">Samsung</option>
+                                        <option value="Apple">Apple</option>
+                                        <option value="Oppo">Oppo</option>
+                                        <option value="Nokia">Nokia</option>
+                                        <option value="Huawei">Huawei</option>
                                     </select>
                                 </div>
+                            </div>
+                            <div className="form-row">
                                 <div className="form-group col-md-2">
-                                    <label htmlFor="inputZip">Zip</label>
-                                    <input type="text" className="form-control" id="inputZip"/>
+                                    <label >Price</label>
+                                    <input type="number" name="price" className="form-control"  placeholder="Price"
+                                           onChange={(e) => {
+                                               this.onValueChange(e);
+                                           }}
+                                    />
+                                </div>
+                                <div className="form-group col-md-2">
+                                    <label >RAM</label>
+                                    <input type="number" name="ram" className="form-control"  placeholder="Brand"
+                                           onChange={(e) => {
+                                               this.onValueChange(e);
+                                           }}
+                                    />
+                                </div>
+                                <div className="form-group col-md-2">
+                                    <label >Storage</label>
+                                    <input type="number" name="storage" className="form-control"  placeholder="Storage"
+                                           onChange={(e) => {
+                                               this.onValueChange(e);
+                                           }}
+                                    />
                                 </div>
                             </div>
                             <div className="form-group">
-                                <div className="form-check">
-                                    <input className="form-check-input" type="checkbox" id="gridCheck"/>
-                                    <label className="form-check-label" htmlFor="gridCheck">
-                                        Check me out
-                                    </label>
+                                <label >Description</label>
+                                <input type="text" name="description" className="form-control" placeholder="Description"
+                                       onChange={(e) => {
+                                           this.onValueChange(e);
+                                       }}
+                                />
+                            </div>
+                            <div className="form-row">
+                                <div className="form-group col-md-3">
+                                    <label>Stock</label>
+                                    <input type="number" name="stock" className="form-control"
+                                           onChange={(e) => {
+                                               this.onValueChange(e);
+                                           }}
+                                    />
                                 </div>
                             </div>
-                            <div className="form-group">
-                                <div className="form-check">
-                                    <label htmlFor="exampleFormControlFile1">Example file input</label>
-                                    <input type="file" className="form-control-file" id="exampleFormControlFile1"/>
+                            <div className="form-row">
+                                <div className="form-group ">
+                                    <div className="form-check">
+                                        <label >Image</label>
+                                        <input type="text" name="imgLink" className="form-control"
+                                               onChange={(e) => {
+                                                   this.onValueChange(e);
+                                               }}
+                                        />
+                                    </div>
                                 </div>
                             </div>
-                            <button type="submit" className="btn btn-primary">Sign in</button>
+                            <button type="submit" className="btn btn-primary" >Submit</button>
                         </form>
                     </div>
                 </div>
+                <Footer/>
             </div>
         );
     }
 }
 
-export default AdminAddItemsPage;
+const mapStateToProps = (state) => ({
+    user: state.authReducer.user,
+});
+
+const mapActionToProps = {
+    addItem: actions.addItem
+
+};
+
+export default connect(mapStateToProps, mapActionToProps)(AdminAddItemsPage);

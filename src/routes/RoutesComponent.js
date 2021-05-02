@@ -6,6 +6,8 @@ import AdminPage from "../pages/AdminPage";
 import AdminAddItemsPage from "../pages/AdminAddItemsPage";
 import AdminUpdateItemsPage from "../pages/AdminUpdateItemsPage";
 import AdminViewItemPage from "../pages/AdminViewItemPage";
+import MyCartPage from "../pages/MyCartPage";
+import ViewItemPage from "../pages/ViewItemPage";
 
 class RoutesComponent extends Component {
   render() {
@@ -15,7 +17,7 @@ class RoutesComponent extends Component {
             <Route path="/" exact component={HomePage} />
             <Route path="/admin" exact component={AdminPage} />
             <Route path="/admin/additem" exact component={AdminAddItemsPage} />
-            <Route path="/admin/updateitem" exact component={AdminUpdateItemsPage} />
+            <Route path="/admin/updateitem/:itemid" exact component={AdminUpdateItemsPage} />
             <Route path="/admin/viewitems" exact component={AdminViewItemPage} />
 
           <Route path="/" exact component={HomePage} />

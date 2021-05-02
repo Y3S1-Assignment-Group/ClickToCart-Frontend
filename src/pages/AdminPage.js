@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import Navbar from "../components/common/Navbar";
+import Navbar from "../components/common/Navbar/Navbar";
 import AdminOptionSelection from "../modules/AdminPageModules/AdminOptionSelections/AdminOptionSelection";
 import AdminItemTable from "../modules/AdminPageModules/AdminItemTable/AdminItemTable";
+import Footer from "../components/common/Footer/Footer";
 
 class AdminPage extends Component {
     render() {
@@ -10,6 +11,7 @@ class AdminPage extends Component {
                 <Navbar/>
                 <AdminOptionSelection/>
                 <AdminItemTable/>
+                <Footer/>
             </div>
         );
     }

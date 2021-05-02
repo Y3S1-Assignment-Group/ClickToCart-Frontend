@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 
 class AdminOptionSelection extends Component {
     render() {
         return (
             <div>
                 <div className="row  m-4">
+
                     <div className="col-lg-4 col-md-4 col-sm-12 mt-4">
                         <div className="card" style={{borderRadius:"20px"}}>
                             <img src="..." className="card-img-top" alt="..."/>
@@ -12,7 +14,7 @@ class AdminOptionSelection extends Component {
                                 <h5 className="card-title">Card title</h5>
                                 <p className="card-text">This is a longer card with supporting text below as a
                                     natural lead-in to additional content. This content is a little bit longer.</p>
-                                <a href="/" className="btn btn-primary">Go somewhere</a>
+                                <Link to="/admin/additem" className="btn btn-primary">Add items</Link>
 
                             </div>
                         </div>
@@ -24,7 +26,7 @@ class AdminOptionSelection extends Component {
                                 <h5 className="card-title">Card title</h5>
                                 <p className="card-text">This is a longer card with supporting text below as a
                                     natural lead-in to additional content. This content is a little bit longer.</p>
-                                <a href="/" className="btn btn-primary">Go somewhere</a>
+                                <Link to="/" className="btn btn-primary">Update Profile</Link>
 
                             </div>
                         </div>
@@ -36,7 +38,7 @@ class AdminOptionSelection extends Component {
                                 <h5 className="card-title">Card title</h5>
                                 <p className="card-text">This is a longer card with supporting text below as a
                                     natural lead-in to additional content. This content is a little bit longer.</p>
-                                <a href="/" className="btn btn-primary">Go somewhere</a>
+                                <Link to="/admin/viewitems" className="btn btn-primary">View Items</Link>
 
                             </div>
                         </div>

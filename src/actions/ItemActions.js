@@ -6,7 +6,10 @@ export const ACTION_TYPES = {
   DELETE_ITEM: "DELETE_ITEM",
   FETCH_ALL_ITEMS: "FETCH_ALL_ITEMS",
   FETCH_FILTER_ITEMS: "FETCH_FILTER_ITEMS",
-  FETCH_ITEM_BY_ID: "FETCH_ITEM_BY_ID"
+  FETCH_ITEM_BY_ID: "FETCH_ITEM_BY_ID",
+    FETCH_ITEMS_BY_SELLARID: "FETCH_ITEMS_BY_SELLARID",
+    UPDATE_STOCK_SELLAR: "UPDATE_STOCK_SELLAR",
+
 };
 
 export const filterAllItems = (data) => (dispatch) => {
@@ -87,4 +90,37 @@ export const deleteItem = (id, OnSuccess, OnFailure) => (dispatch) => {
     .catch(() => {
       OnFailure();
     });
+};
+
+export const fetchAllItemsBySellarID = (id) => (dispatch) => {
+    api
+        .items()
+        .fetchItemsBySellarId(id)
+        .then((response) => {
+            dispatch({
+                type: ACTION_TYPES.FETCH_ITEMS_BY_SELLARID,
+                payload:  response.data ,
+            });
+        })
+        .catch(() => {
+        });
+};
+
+
+export const updateStockSeller = (qty,id,onSuccess,onFailure) => (dispatch) => {
+    console.log(qty,id)
+    api
+        .items()
+        .updateStockSeller(qty,id)
+        .then((response) => {
+            // dispatch({
+            //     type: ACTION_TYPES.UPDATE_STOCK_SELLAR,
+            //     payload:  response.data ,
+            // });
+            onSuccess();
+        })
+        .catch(() => {
+            onFailure();
+        });
+
 };
