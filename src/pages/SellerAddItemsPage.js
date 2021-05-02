@@ -6,7 +6,7 @@ import Footer from "../components/common/Footer/Footer";
 import * as cartActions from "../actions/CartActions";
 
 
-class AdminAddItemsPage extends Component {
+class SellerAddItemsPage extends Component {
     constructor(props) {
         super(props);
         this.onValueChange = this.onValueChange.bind(this)
@@ -60,7 +60,7 @@ class AdminAddItemsPage extends Component {
                     processStatusAlert: "alert alert-success",
                     processStatusMessage: "Account created successfully",
                 });
-                window.location = "/admin"
+                window.location = "/seller"
             },
             () => {
                 this.setState({
@@ -179,4 +179,4 @@ const mapActionToProps = {
 
 };
 
-export default connect(mapStateToProps, mapActionToProps)(AdminAddItemsPage);
+export default connect(mapStateToProps, mapActionToProps)(SellerAddItemsPage);
