@@ -139,12 +139,6 @@ class SingleItemView extends Component {
               </div>
             </div>
             <div className="row mb-2">
-              <div className="col-lg-3 col-md-3 col-sm-3 text-muted">Stock</div>
-              <div className="col-lg-8 col-md-8 col-sm-8 text-left">
-                {this.props.singleItem.stock}
-              </div>
-            </div>
-            <div className="row mb-2">
               <div className="col-lg-3 col-md-3 col-sm-3 text-muted">
                 Seller
               </div>
@@ -167,8 +161,20 @@ class SingleItemView extends Component {
               </div>
             </div>
             <div className="row mb-2">
+              <div className="col-lg-3 col-md-3 col-sm-3 text-muted">Stock</div>
+              <div className="col-lg-8 col-md-8 col-sm-8 text-left">
+                <span style={{ fontWeight: "bolder" }}>
+                  {this.props.singleItem.stock}
+                </span>
+              </div>
+            </div>
+            <div className="row mb-2">
               <div className="col-lg-3 col-md-3 p-2">
-                <button className="btn btn-warning" onClick={this.add}>
+                <button
+                  className="btn btn-warning"
+                  onClick={this.add}
+                  disabled={this.state.qty >= this.props.singleItem.stock}
+                >
                   +
                 </button>{" "}
                 <button

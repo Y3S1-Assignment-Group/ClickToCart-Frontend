@@ -95,7 +95,7 @@ export class Navbar extends Component {
                   <li className="nav-item active p-2">
                     <a
                       className="nav-link navLinkTab"
-                      href="/dashboard"
+                      href="/seller"
                       style={{ color: "#c4026d" }}
                     >
                       <PeopleAltIcon />
