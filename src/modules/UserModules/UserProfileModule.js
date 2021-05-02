@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import user from '../../assets/img/UserProfilePage/user.png';
-import Payment from '../PaymentModules/Payment';
-import * as actions from '../../actions/CartActions';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import UserImg from "../../assets/img/UserProfilePage/user.jpg";
+import * as actions from "../../actions/CartActions";
+import "./UserProfileModule.css";
 
 class UserProfileModule extends Component {
   constructor(props) {
@@ -11,52 +11,60 @@ class UserProfileModule extends Component {
   }
 
   componentDidMount() {
-    this.props.getPayedItemsFromCart(this.props.user.id);
+    if (this.props.user) {
+      this.props.getPayedItemsFromCart(this.props.user.id);
+    } else {
+      window.location = "/";
+    }
   }
 
   render() {
     return (
-      <div className='container mt-4'>
-        <h2>
-          <center>My Profile</center>
-        </h2>
-        <div className='row p-5'>
-          <div className='col-lg-4 col-md-4 col-sm-12'>
-            <img
-              src='https://kittyinpink.co.uk/wp-content/uploads/2016/12/facebook-default-photo-male_1-1.jpg'
-              alt='logo'
-              style={{ width: '150px', height: '150px' }}
-            />
-          </div>
-          <div className='col-lg-8 col-md-8 col-sm-12 mt-5'>
-            <div className='row mb-2'>
-              <div className='col-lg-4 col-md-4 col-sm-6 text-muted '>Name</div>
-              <div className='col-lg-8 col-md-8 col-sm-6 '>
-                {this.props.user.username}
-              </div>
+      <div className="container mt-4">
+        <div className="container mb-3">
+          <div className="row p-5 profileDetailsRow">
+            <div className="col-lg-4 col-md-4 col-sm-12">
+              <img
+                src={UserImg}
+                alt="logo"
+                style={{ width: "200px", height: "200px" }}
+              />
             </div>
-            <div className='row mb-2'>
-              <div className='col-lg-4 col-md-4 col-sm-6 text-muted '>
-                Email
+            <div className="col-lg-8 col-md-8 col-sm-12 mt-3">
+              <h1 className="text-muted">My Profile</h1>
+              <hr />
+              <div className="row mb-2">
+                <div className="col-lg-4 col-md-4 col-sm-6 text-muted ">
+                  Name
+                </div>
+                <div className="col-lg-8 col-md-8 col-sm-6 ">
+                  {this.props.user.username}
+                </div>
               </div>
-              <div className='col-lg-8 col-md-8 col-sm-6 '>
-                {this.props.user.email}
+              <div className="row mb-2">
+                <div className="col-lg-4 col-md-4 col-sm-6 text-muted ">
+                  Email
+                </div>
+                <div className="col-lg-8 col-md-8 col-sm-6 ">
+                  {this.props.user.email}
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div class='card bg-warning'>
-          <div class='card-body mt-2'>
-            <div className='row mb-2'>
-              <table className='table table-md table-responsive'>
-                <div className='table-responsive'>
-                  <table className='table align-middle'>
+
+        <div class="card userpurchasedtable">
+          <div class="card-body mt-2 userpurchasedtable">
+            <div className="row mb-2 userpurchasedtable">
+              <table className="table table-md table-responsive userpurchasedtable">
+                <div className="table-responsive userpurchasedtable">
+                  <table className="table align-middle userpurchasedtable">
                     <thead>
-                      <th scope='col'>Product</th>
-                      <th scope='col'>Quantity</th>
-                      <th scope='col'>Price</th>
-                      <th scope='col'>Purchased Date</th>
-                      <th scope='col'></th>
+                      <th scope="col">Product</th>
+                      <th scope="col">Quantity</th>
+                      <th scope="col">Price</th>
+                      <th scope="col">Purchased Date</th>
+                      <th scope="col"></th>
                     </thead>
                     <tbody>
                       {this.props.payedCartList.map((cartItem) => {
@@ -73,10 +81,10 @@ class UserProfileModule extends Component {
                       <tr>
                         <td></td>
                         <td>
-                          <h5 className='font-weight-bold'>Total</h5>
+                          <h5 className="font-weight-bold">Total</h5>
                         </td>
                         <td>
-                          <h5 className='font-weight-bold'>
+                          <h5 className="font-weight-bold">
                             {this.props.payedCartList.reduce(
                               (accumulator, current) =>
                                 accumulator + current.totalPrice,

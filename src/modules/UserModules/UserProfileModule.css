@@ -1,0 +1,23 @@
+.userpurchasedtable {
+  /* background-image: linear-gradient(
+    to right top,
+    #ed5d00,
+    #f17b00,
+    #f39800,
+    #f3b300,
+    #f0cd12
+  ); */
+  background-image: linear-gradient(
+    to right top,
+    #bf0461,
+    #cb0161,
+    #d60060,
+    #e2005f,
+    #ed005d
+  );
+  color: aliceblue;
+}
+
+.profileDetailsRow {
+  background-color: #edede8;
+}
