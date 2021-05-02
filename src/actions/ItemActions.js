@@ -9,6 +9,8 @@ export const ACTION_TYPES = {
   FETCH_ITEM_BY_ID: "FETCH_ITEM_BY_ID",
     FETCH_ITEMS_BY_SELLARID: "FETCH_ITEMS_BY_SELLARID",
     UPDATE_STOCK_SELLAR: "UPDATE_STOCK_SELLAR",
+    FETCH_ITEM_STOCK_BY_BRAND: "FETCH_ITEM_STOCK_BY_BRAND",
+
 
 };
 
@@ -108,7 +110,6 @@ export const fetchAllItemsBySellarID = (id) => (dispatch) => {
 
 
 export const updateStockSeller = (qty,id,onSuccess,onFailure) => (dispatch) => {
-    console.log(qty,id)
     api
         .items()
         .updateStockSeller(qty,id)
@@ -121,6 +122,21 @@ export const updateStockSeller = (qty,id,onSuccess,onFailure) => (dispatch) => {
         })
         .catch(() => {
             onFailure();
+        });
+
+};
+
+export const fetchStockByBrandSellar = (id) => (dispatch) => {
+    api
+        .items()
+        .fetchitemstockbybrandforuser(id)
+        .then((response) => {
+            dispatch({
+                type: ACTION_TYPES.FETCH_ITEM_STOCK_BY_BRAND,
+                payload:  response.data ,
+            });
+        })
+        .catch(() => {
         });
 
 };

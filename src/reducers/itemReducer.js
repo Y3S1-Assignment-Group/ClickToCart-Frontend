@@ -6,6 +6,7 @@ const initialState = {
   singleItem:"",
   deletedItem: "",
   sellarItemList:[],
+  stockBrandList:[],
 };
 
 export const itemReducer = (state = initialState, action) => {
@@ -49,11 +50,17 @@ export const itemReducer = (state = initialState, action) => {
         ...state,
         sellarItemList: [...action.payload],
       };
+    case ACTION_TYPES.FETCH_ITEM_STOCK_BY_BRAND:
+      return {
+        ...state,
+        stockBrandList: [...action.payload],
+      };
     // case ACTION_TYPES.UPDATE_STOCK_SELLAR:
     //   return {
     //     ...state,
     //
     //   };
+
     default:
       return state;
   }
