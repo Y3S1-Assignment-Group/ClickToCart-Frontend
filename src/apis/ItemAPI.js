@@ -16,6 +16,8 @@ const itemsAPI = {
       update: (updateItem) =>
         axios.put(baseUrl + "/api/item", updateItem, config),
       delete: (id) => axios.delete(baseUrl + "/api/item/" + id, config),
+      fetchItemsBySellarId:(id) => axios.get(baseUrl + "/api/item/useritems/" + id, config),
+      updateStockSeller:(qty,id)=> axios.put(baseUrl + "/api/item/sellar/" + qty+ "/" + id, config),
     };
   },
 };

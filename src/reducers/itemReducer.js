@@ -4,9 +4,8 @@ const initialState = {
   itemList: [],
   filterItemList: [],
   singleItem:"",
-  newItem: "",
-  updatedItem: "",
   deletedItem: "",
+  sellarItemList:[],
 };
 
 export const itemReducer = (state = initialState, action) => {
@@ -30,23 +29,31 @@ export const itemReducer = (state = initialState, action) => {
     case ACTION_TYPES.ADD_ITEM:
       return {
         ...state,
-        itemList: [...state.itemList, action.payload],
-        newItem: action.payload,
+        sellarItemList: [...state.sellarItemList, action.payload],
       };
     case ACTION_TYPES.UPDATE_ITEM:
       return {
         ...state,
-        itemList: state.itemList.map((x) =>
+        sellarItemList: state.sellarItemList.map((x) =>
           x.id === action.payload.id ? action.payload : x
         ),
-        updatedItem: action.payload,
       };
     case ACTION_TYPES.DELETE_ITEM:
       return {
         ...state,
-        itemList: state.itemList.filter((x) => x.id !== action.payload.id),
+        sellarItemList: state.sellarItemList.filter((x) => x.id !== action.payload.id),
         deletedItem: action.payload.id,
       };
+    case ACTION_TYPES.FETCH_ITEMS_BY_SELLARID:
+      return {
+        ...state,
+        sellarItemList: [...action.payload],
+      };
+    // case ACTION_TYPES.UPDATE_STOCK_SELLAR:
+    //   return {
+    //     ...state,
+    //
+    //   };
     default:
       return state;
   }
