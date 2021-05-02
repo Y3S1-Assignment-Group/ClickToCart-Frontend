@@ -97,4 +97,5 @@ export const logout = () => (dispatch) => {
   dispatch({
     type: ACTION_TYPES.LOGOUT,
   });
+  window.location = "/";
 };

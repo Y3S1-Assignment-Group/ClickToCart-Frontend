@@ -169,27 +169,25 @@ class SingleItemView extends Component {
               </div>
             </div>
             <div className="row mb-2">
-              <div className="col-lg-3 col-md-3 p-2">
+              <div className="col-lg-3 col-md-3 col-sm-3 text-muted">
+                Quantity
+              </div>
+              <div className="col-lg-8 col-md-8 p-2">
+                <button
+                  className="btn btn-warning  mr-3"
+                  onClick={this.subtract}
+                  disabled={this.state.qty <= 1}
+                >
+                  -
+                </button>
+                <span className="font-weight-bold mr-3 ">{this.state.qty}</span>
                 <button
                   className="btn btn-warning"
                   onClick={this.add}
                   disabled={this.state.qty >= this.props.singleItem.stock}
                 >
                   +
-                </button>{" "}
-                <button
-                  className="btn btn-warning"
-                  onClick={this.subtract}
-                  disabled={this.state.qty <= 1}
-                >
-                  -
                 </button>
-              </div>
-              <div className="col-sm-6 mt-3">
-                <h5>
-                  Quantity:{" "}
-                  <span className="font-weight-bold">{this.state.qty}</span>{" "}
-                </h5>
               </div>
             </div>
           </div>

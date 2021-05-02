@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import BannerOneImg from "../../../assets/img/HomePage/banner1.jpg";
+import BannerTwoImg from "../../../assets/img/HomePage/banner2.jpg";
+import BannerThreeImg from "../../../assets/img/HomePage/banner3.jpg";
 
 export class HomeHeroCarousel extends Component {
   render() {
@@ -22,21 +25,21 @@ export class HomeHeroCarousel extends Component {
             <div className="carousel-item active">
               <img
                 className="d-block w-100"
-                src="https://image.freepik.com/free-vector/new-style-fashion-sale-promotion-banner-template_99493-42.jpg"
+                src={BannerOneImg}
                 alt="First slide"
               />
             </div>
             <div className="carousel-item">
               <img
                 className="d-block w-100"
-                src="https://image.freepik.com/free-vector/fashion-banner-background-web-banner-billboard-fashion-promotion-funny-design-concept_142491-93.jpg"
+                src={BannerTwoImg}
                 alt="Second slide"
               />
             </div>
             <div className="carousel-item">
               <img
                 className="d-block w-100"
-                src="https://industram.in/slider_image/746995e262b47ccb0a69f23d7b03f2e5.jpg"
+                src={BannerThreeImg}
                 alt="Third slide"
               />
             </div>

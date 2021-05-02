@@ -67,16 +67,21 @@ export class Navbar extends Component {
                   EXPLORE
                 </a>
               </li>
-              <li className="nav-item active">
-                <a
-                  className="nav-link navLinkTab"
-                  href="/cart"
-                  style={{ color: "#c4026d" }}
-                >
-                  <ShoppingCartIcon />
-                  CART
-                </a>
-              </li>
+              {this.props.user &&
+              this.props.user.roles[0] === "ROLE_MODERATOR" ? (
+                ""
+              ) : (
+                <li className="nav-item active">
+                  <a
+                    className="nav-link navLinkTab"
+                    href="/cart"
+                    style={{ color: "#c4026d" }}
+                  >
+                    <ShoppingCartIcon />
+                    CART
+                  </a>
+                </li>
+              )}
             </ul>
             <ul className="navbar-nav mr-auto navLinkTab mr-sm-2">
               {this.props.isLoggedIn ? (
