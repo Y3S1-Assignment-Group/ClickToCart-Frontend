@@ -2,6 +2,7 @@ import { ACTION_TYPES } from "../actions/CartActions";
 
 const initialState = {
   cartList: [],
+  payedCartList: [],
 };
 
 export const cartReducer = (state = initialState, action) => {
@@ -23,6 +24,11 @@ export const cartReducer = (state = initialState, action) => {
                   (x) => x.id !== action.payload.id
                 ),
             };
+        case ACTION_TYPES.GET_PAYED_ITEMS_FROM_CART:
+            return {
+                 ...state,
+                 payedCartList: [...action.payload],
+                };
         default:
             return state;
     }

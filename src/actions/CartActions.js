@@ -1,9 +1,10 @@
-import api from "../apis/CartAPI";
+import api from '../apis/CartAPI';
 
 export const ACTION_TYPES = {
-  ADD_ITEM_TO_CART: "ADD_ITEM_TO_CART",
-  GET_ITEM_FROM_CART: "GET_ITEM_FROM_CART",
-  DELETE_ITEM_FROM_CART: "DELETE_ITEM_FROM_CART",
+  ADD_ITEM_TO_CART: 'ADD_ITEM_TO_CART',
+  GET_ITEM_FROM_CART: 'GET_ITEM_FROM_CART',
+  DELETE_ITEM_FROM_CART: 'DELETE_ITEM_FROM_CART',
+  GET_PAYED_ITEMS_FROM_CART: 'GET_PAYED_ITEMS_FROM_CART',
 };
 
 export const addItemToCart = (data, onSuccess, onFailure) => (dispatch) => {
@@ -49,4 +50,17 @@ export const deleteItemFromCart = (id, onSuccess, onFailure) => (dispatch) => {
     .catch(() => {
       onFailure();
     });
+};
+
+export const getPayedItemsFromCart = (id) => (dispatch) => {
+  api
+    .cartItems()
+    .fetchPayedCartItemsForUser(id)
+    .then((response) => {
+      dispatch({
+        type: ACTION_TYPES.GET_PAYED_ITEMS_FROM_CART,
+        payload: response.data,
+      });
+    })
+    .catch(() => {});
 };
