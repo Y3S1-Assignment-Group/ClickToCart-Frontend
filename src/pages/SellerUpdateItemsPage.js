@@ -4,7 +4,7 @@ import Footer from "../components/common/Footer/Footer";
 import * as actions from "../actions/ItemActions";
 import {connect} from "react-redux";
 
-class AdminUpdateItemsPage extends Component {
+class SellerUpdateItemsPage extends Component {
     constructor(props) {
         super(props);
         this.onValueChange = this.onValueChange.bind(this)
@@ -188,4 +188,4 @@ const mapActionToProps = {
 
 };
 
-export default connect(mapStateToProps, mapActionToProps)(AdminUpdateItemsPage);
+export default connect(mapStateToProps, mapActionToProps)(SellerUpdateItemsPage);

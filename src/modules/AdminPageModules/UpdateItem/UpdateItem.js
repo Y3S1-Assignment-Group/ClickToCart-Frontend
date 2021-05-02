@@ -87,7 +87,7 @@ class UpdateItem extends Component {
                     </div>
                     <div className="form-group">
                         <label >Storage</label>
-                        <input type="text" className="form-control" onChange={(e)=>{this.setState({stotage:e.target.value})}} value={this.state.storage}/>
+                        <input type="text" className="form-control" onChange={(e)=>{this.setState({storage:e.target.value})}} value={this.state.storage}/>
                     </div>
                     <div className="form-group">
                         <label >Price</label>

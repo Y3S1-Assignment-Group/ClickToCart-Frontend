@@ -9,7 +9,7 @@ import UpdateStockModal from "../modules/AdminPageModules/UpdateStockModal/Updat
 import UpdateItem from "../modules/AdminPageModules/UpdateItem/UpdateItem";
 
 
-class AdminViewItemPage extends Component {
+class SellerViewItemPage extends Component {
 
     constructor(props) {
         super(props);
@@ -142,4 +142,4 @@ const mapActionToProps = {
     deleteItem:actions.deleteItem,
 };
 
-export default connect(mapStateToProps, mapActionToProps)(AdminViewItemPage);
+export default connect(mapStateToProps, mapActionToProps)(SellerViewItemPage);

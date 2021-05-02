@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
-class AdminOptionSelection extends Component {
+class SellerOptionSelection extends Component {
     render() {
         return (
             <div>
@@ -14,7 +14,7 @@ class AdminOptionSelection extends Component {
                                 <h5 className="card-title">Card title</h5>
                                 <p className="card-text">This is a longer card with supporting text below as a
                                     natural lead-in to additional content. This content is a little bit longer.</p>
-                                <Link to="/admin/additem" className="btn btn-primary">Add items</Link>
+                                <Link to="/seller/additem" className="btn btn-primary">Add items</Link>
 
                             </div>
                         </div>
@@ -38,7 +38,7 @@ class AdminOptionSelection extends Component {
                                 <h5 className="card-title">Card title</h5>
                                 <p className="card-text">This is a longer card with supporting text below as a
                                     natural lead-in to additional content. This content is a little bit longer.</p>
-                                <Link to="/admin/viewitems" className="btn btn-primary">View Items</Link>
+                                <Link to="/seller/viewitems" className="btn btn-primary">View Items</Link>
 
                             </div>
                         </div>
@@ -66,4 +66,4 @@ class AdminOptionSelection extends Component {
     }
 }
 
-export default AdminOptionSelection;
+export default SellerOptionSelection;
