@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import ItemsPieChart from "../SellerCharts/ItemPieChart/ItemsPieChart";
 import ItemBarGraph from "../SellerCharts/ItemBarGraph/ItemBarGraph";
-import addItemsImg from "./img/iphone-12-pro-family-hero.png";
 
 
 class SellerOptionSelection extends Component {
