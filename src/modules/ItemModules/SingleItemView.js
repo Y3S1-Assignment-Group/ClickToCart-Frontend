@@ -10,6 +10,7 @@ class SingleItemView extends Component {
     super(props);
     this.add = this.add.bind(this);
     this.subtract = this.subtract.bind(this);
+    this.addItemToCartFunction = this.addItemToCartFunction.bind(this);
     this.state = {
       qty: 1,
       processStatus: false,
@@ -85,14 +86,18 @@ class SingleItemView extends Component {
                 <div className="row mt-2 text-center">
                   <div className="col-lg-4 col-md-3 p-2"></div>
                   <div className="col-lg-4 col-md-3 p-2">
-                    <button
-                      className="btn btn-warning btn-lg"
-                      onClick={() => {
-                        this.addItemToCartFunction();
-                      }}
-                    >
-                      ADD TO CART <ShoppingCartIcon />
-                    </button>
+                    {this.props.user ? (
+                      <button
+                        className="btn btn-warning btn-lg"
+                        onClick={this.addItemToCartFunction}
+                      >
+                        ADD TO CART <ShoppingCartIcon />
+                      </button>
+                    ) : (
+                      <button className="btn btn-warning btn-lg" disabled>
+                        ADD TO CART <ShoppingCartIcon />
+                      </button>
+                    )}
                   </div>
                   <div className="col-lg-4 col-md-3 p-2"></div>
                   {this.state.processStatus ? (

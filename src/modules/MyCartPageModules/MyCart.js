@@ -13,20 +13,19 @@ export class MyCart extends Component {
 
   componentDidMount() {
     this.props.getItemFromCart(this.props.user.id);
-    this.props.deleteItemFromCart(this.props.cartId, ()=>{
-
-    },()=>{
-
-    });
+    this.props.deleteItemFromCart(
+      this.props.cartId,
+      () => {},
+      () => {}
+    );
   }
 
   deleteItemFromCartFunc(id) {
-
-    this.props.deleteItemFromCart(id,
-      () => {
-      },
-      () => {
-      });
+    this.props.deleteItemFromCart(
+      id,
+      () => {},
+      () => {}
+    );
   }
 
   render() {
@@ -57,7 +56,12 @@ export class MyCart extends Component {
                         <td>{cartItem.qty}</td>
                         <td>{cartItem.totalPrice}</td>
                         <td>
-                          <button className="btn btn-danger btn-sm" onClick={()=>this.deleteItemFromCartFunc(cartItem.id)}>
+                          <button
+                            className="btn btn-danger btn-sm"
+                            onClick={() =>
+                              this.deleteItemFromCartFunc(cartItem.id)
+                            }
+                          >
                             <HighlightOffIcon />
                           </button>
                         </td>
@@ -85,6 +89,7 @@ export class MyCart extends Component {
                 </tbody>
               </table>
               <Payment
+                cartItemList={this.props.cartList}
                 userID={this.props.user.id}
                 totalAmount={this.props.cartList.reduce(
                   (accumulator, current) => accumulator + current.totalPrice,
