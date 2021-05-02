@@ -4,6 +4,7 @@ import ExplorePage from "../pages/ExplorePage";
 import HomePage from "../pages/HomePage";
 import MyCartPage from "../pages/MyCartPage";
 import ViewItemPage from "../pages/ViewItemPage";
+import UserProfile from "../pages/UserProfile";
 
 class RoutesComponent extends Component {
   render() {
@@ -14,6 +15,7 @@ class RoutesComponent extends Component {
           <Route path="/cart" exact component={MyCartPage} />
           <Route path="/explore" exact component={ExplorePage} />
           <Route path="/product/:productid" exact component={ViewItemPage} />
+          <Route path="/profile" exact component={UserProfile} />
         </Switch>
       </Router>
     );
