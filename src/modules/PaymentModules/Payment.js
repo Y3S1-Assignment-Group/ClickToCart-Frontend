@@ -54,7 +54,17 @@ class Payment extends React.Component {
           processStatusAlert: "alert alert-success",
           processStatusMessage: "Congratulations!! Payment Success",
         });
-        this.props.getItemFromCart(this.props.userID);
+
+        const newMail = {
+          to: this.props.email,
+          subject: "ClickToCart | Order Confirmation",
+          text: `Congratulations! Your order has been received. Order will be received to ${this.props.address}`,
+        };
+        axios
+          .post(process.env.REACT_APP_BACKEND_URL + "/api/mail/send", newMail)
+          .then(() => {
+            this.props.getItemFromCart(this.props.userID);
+          });
       })
       .catch(() => {
         this.setState({
