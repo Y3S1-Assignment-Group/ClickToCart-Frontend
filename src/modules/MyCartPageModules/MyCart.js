@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
-import Payment from "../PaymentModules/Payment";
+
 import { connect } from "react-redux";
 import * as actions from "../../actions/CartActions";
+import CheckOutModule from "../CheckOutPageModules/CheckOutModule";
 
 export class MyCart extends Component {
   constructor(props) {
@@ -88,17 +89,10 @@ export class MyCart extends Component {
                   </tr>
                 </tbody>
               </table>
-              <Payment
-                cartItemList={this.props.cartList}
-                userID={this.props.user.id}
-                totalAmount={this.props.cartList.reduce(
-                  (accumulator, current) => accumulator + current.totalPrice,
-                  0
-                )}
-              />
             </div>
           </table>
         </div>
+        <CheckOutModule />
       </div>
     );
   }
