@@ -19,7 +19,7 @@ export class ShoppingCart extends Component {
         <div className="row">
           <div className="col-lg-12">
             <div className="row mb-5">
-              {this.props.itemList.map((item, index) => {
+              {this.props.filterItemList.slice(0, 12).map((item, index) => {
                 return (
                   <div
                     className="col-lg-4 col-md-4 col-sm-12 p-3 ShoppingCartSingleItemCol"
@@ -64,6 +64,7 @@ export class ShoppingCart extends Component {
 
 const mapStateToProps = (state) => ({
   itemList: state.itemReducer.itemList,
+  filterItemList: state.itemReducer.filterItemList,
 });
 
 const mapActionToProps = {

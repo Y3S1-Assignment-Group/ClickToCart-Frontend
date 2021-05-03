@@ -71,15 +71,14 @@ class SellerAddItemsPage extends Component {
       () => {
         this.setState({
           processStatusAlert: "alert alert-success",
-          processStatusMessage: "Account created successfully",
+          processStatusMessage: "Product added successfully",
         });
         window.location = "/seller";
       },
       () => {
         this.setState({
           processStatusAlert: "alert alert-danger",
-          processStatusMessage:
-            "Something went wrong. Please try again with different username",
+          processStatusMessage: "Something went wrong",
         });
       }
     );
@@ -87,6 +86,11 @@ class SellerAddItemsPage extends Component {
 
   uploadImage(e) {
     if (e.target.files[0] !== null) {
+      this.setState({
+        processStatus: true,
+        processStatusAlert: "alert alert-warning",
+        processStatusMessage: "Image Uploading...",
+      });
       const uploadTask = storage
         .ref(`products/${e.target.files[0].name}`)
         .put(e.target.files[0]);
@@ -112,11 +116,18 @@ class SellerAddItemsPage extends Component {
             .then((url) => {
               console.log(url);
               this.setState({ imgLink: url });
+              this.setState({
+                processStatusAlert: "alert alert-success",
+                processStatusMessage: "Image uploaded successfully",
+              });
             });
         }
       );
     } else {
-      alert("First You Must Select An Image");
+      this.setState({
+        processStatusAlert: "alert alert-danger",
+        processStatusMessage: "Something went wrong",
+      });
     }
   }
 
@@ -124,7 +135,10 @@ class SellerAddItemsPage extends Component {
     return (
       <div>
         <Navbar />
-        <div className="card m-4">
+        <h1 className="text-muted text-center font-weight-bold mt-3">
+          ADD PRODUCT
+        </h1>
+        <div className="card m-4" style={{ backgroundColor: "#ebebeb" }}>
           <div className="card-body">
             <form onSubmit={this.onAddItem}>
               <div className="form-row">
@@ -230,7 +244,7 @@ class SellerAddItemsPage extends Component {
                 </div>
               </div>
               <div className="form-row">
-                <div class="form-group">
+                <div className="form-group">
                   {this.state.imgLink ? (
                     <img
                       src={this.state.imgLink}
@@ -248,10 +262,10 @@ class SellerAddItemsPage extends Component {
                   <label style={{ fontSize: "12px", marginLeft: "15px" }}>
                     Image
                   </label>
-                  <div className="row">
+                  <div className="row mt-2">
                     <div className="col-md-9">
                       <input
-                        class="form-control "
+                        className="form-control "
                         type="file"
                         id="exampleInputEmail"
                         name="Image"
@@ -266,11 +280,21 @@ class SellerAddItemsPage extends Component {
                   </div>
                 </div>
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <Progress percentage={this.state.uploadPercentage} />
               </div>
 
-              <button type="submit" className="btn btn-primary">
+              <div className="form-group mb-0">
+                {this.state.processStatus ? (
+                  <div className={this.state.processStatusAlert} role="alert">
+                    {this.state.processStatusMessage}
+                  </div>
+                ) : (
+                  ""
+                )}
+              </div>
+
+              <button type="submit" className="btn btn-primary mt-0">
                 ADD PRODUCT
               </button>
             </form>

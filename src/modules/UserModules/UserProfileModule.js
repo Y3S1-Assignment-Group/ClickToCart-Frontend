@@ -53,8 +53,8 @@ class UserProfileModule extends Component {
           </div>
         </div>
 
-        <div class="card userpurchasedtable">
-          <div class="card-body mt-2 userpurchasedtable">
+        <div className="card userpurchasedtable">
+          <div className="card-body mt-2 userpurchasedtable">
             <div className="row mb-2 userpurchasedtable">
               <table className="table table-md table-responsive userpurchasedtable">
                 <div className="table-responsive userpurchasedtable">

@@ -7,7 +7,9 @@ class ExploreShoppingCartForm extends Component {
   constructor(props) {
     super(props);
     this.onValueChange = this.onValueChange.bind(this);
+    this.onValueChangeName = this.onValueChangeName.bind(this);
     this.checkProducts = this.checkProducts.bind(this);
+    this.checkProductsByName = this.checkProductsByName.bind(this);
     this.state = {
       all: "",
       price: 0,
@@ -77,6 +79,26 @@ class ExploreShoppingCartForm extends Component {
     this.props.filterAllItems(this.props.itemList.filter(this.checkProducts));
   }
 
+  checkProductsByName(list) {
+    if (this.state.name !== "") {
+      return (
+        list.name.toLowerCase().includes(this.state.name.toLowerCase()) ||
+        list.brand.toLowerCase().includes(this.state.name.toLowerCase()) ||
+        list.sellarName.toLowerCase().includes(this.state.name.toLowerCase())
+      );
+    } else {
+      return list;
+    }
+  }
+
+  async onValueChangeName(e) {
+    await this.setState({ [e.target.name]: e.target.value });
+
+    this.props.filterAllItems(
+      this.props.itemList.filter(this.checkProductsByName)
+    );
+  }
+
   render() {
     return (
       <div>
@@ -102,6 +124,20 @@ class ExploreShoppingCartForm extends Component {
           </div>
 
           <hr />
+          <div className="mb-3">
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                name="name"
+                id="name"
+                placeholder="search"
+                onChange={(e) => {
+                  this.onValueChangeName(e);
+                }}
+              />
+            </div>
+          </div>
           <div className="mb-3">
             <label
               for="customRange1"
