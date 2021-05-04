@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as actions from "../../../actions/ItemActions";
 import { Link } from "react-router-dom";
 
 class ExploreShoppingCartList extends Component {
@@ -8,9 +7,6 @@ class ExploreShoppingCartList extends Component {
     super();
   }
 
-  componentDidMount() {
-    this.props.fetchAllItems();
-  }
   render() {
     return (
       <div>
@@ -55,11 +51,4 @@ const mapStateToProps = (state) => ({
   filterItemList: state.itemReducer.filterItemList,
 });
 
-const mapActionToProps = {
-  fetchAllItems: actions.fetchAllItems,
-};
-
-export default connect(
-  mapStateToProps,
-  mapActionToProps
-)(ExploreShoppingCartList);
+export default connect(mapStateToProps, null)(ExploreShoppingCartList);

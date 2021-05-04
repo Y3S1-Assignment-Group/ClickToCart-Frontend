@@ -12,15 +12,6 @@ export class MyCart extends Component {
     this.state = {};
   }
 
-  componentDidMount() {
-    this.props.getItemFromCart(this.props.user.id);
-    this.props.deleteItemFromCart(
-      this.props.cartId,
-      () => {},
-      () => {}
-    );
-  }
-
   deleteItemFromCartFunc(id) {
     this.props.deleteItemFromCart(
       id,
@@ -104,7 +95,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapActionToProps = {
-  getItemFromCart: actions.getItemFromCart,
   deleteItemFromCart: actions.deleteItemFromCart,
 };
 

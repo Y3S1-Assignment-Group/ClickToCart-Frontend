@@ -10,14 +10,6 @@ class UserProfileModule extends Component {
     this.state = {};
   }
 
-  componentDidMount() {
-    if (this.props.user) {
-      this.props.getPayedItemsFromCart(this.props.user.id);
-    } else {
-      window.location = "/";
-    }
-  }
-
   render() {
     return (
       <div className="container mt-4">
@@ -62,21 +54,22 @@ class UserProfileModule extends Component {
                     <thead>
                       <th scope="col">Product</th>
                       <th scope="col">Quantity</th>
-                      <th scope="col">Price</th>
+                      <th scope="col">Price ( USD )</th>
                       <th scope="col">Purchased Date</th>
                       <th scope="col"></th>
                     </thead>
                     <tbody>
-                      {this.props.payedCartList.map((cartItem) => {
-                        return (
-                          <tr>
-                            <td>{cartItem.itemName}</td>
-                            <td>{cartItem.qty}</td>
-                            <td>{cartItem.totalPrice}</td>
-                            <td>{cartItem.modifiedDate}</td>
-                          </tr>
-                        );
-                      })}
+                      {this.props.payedCartList &&
+                        this.props.payedCartList.map((cartItem) => {
+                          return (
+                            <tr>
+                              <td>{cartItem.itemName}</td>
+                              <td>{cartItem.qty}</td>
+                              <td>{cartItem.totalPrice}</td>
+                              <td>{cartItem.modifiedDate}</td>
+                            </tr>
+                          );
+                        })}
 
                       <tr>
                         <td></td>

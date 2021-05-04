@@ -1,16 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as actions from "../../../actions/ItemActions";
 import { Link } from "react-router-dom";
 import "./ShoppingCart.css";
 
 export class ShoppingCart extends Component {
   constructor(props) {
     super();
-  }
-
-  componentDidMount() {
-    this.props.fetchAllItems();
   }
 
   render() {
@@ -67,8 +62,4 @@ const mapStateToProps = (state) => ({
   filterItemList: state.itemReducer.filterItemList,
 });
 
-const mapActionToProps = {
-  fetchAllItems: actions.fetchAllItems,
-};
-
-export default connect(mapStateToProps, mapActionToProps)(ShoppingCart);
+export default connect(mapStateToProps, null)(ShoppingCart);
