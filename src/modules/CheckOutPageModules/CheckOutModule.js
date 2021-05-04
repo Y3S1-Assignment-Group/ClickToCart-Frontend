@@ -54,7 +54,9 @@ class CheckOutModule extends Component {
                       class="form-control"
                       placeholder="Enter email"
                       value={this.props.user.email}
-                      readOnly
+                      onChange={(e) => {
+                        this.setState({ email: e.target.value });
+                      }}
                     />
                   </div>
                   <div class="form-group">
@@ -99,7 +101,11 @@ class CheckOutModule extends Component {
                   <Payment
                     cartItemList={this.props.cartList}
                     userID={this.props.user.id}
-                    email={this.props.user.email}
+                    email={
+                      this.state.email !== ""
+                        ? this.state.email
+                        : this.props.user.email
+                    }
                     contactno={this.state.contactno}
                     address={this.state.address}
                     totalAmount={this.props.cartList.reduce(

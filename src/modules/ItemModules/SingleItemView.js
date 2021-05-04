@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { connect } from "react-redux";
-import * as actions from "../../actions/ItemActions";
 import * as cartActions from "../../actions/CartActions";
 
 /* SingleItemView */
@@ -17,10 +16,6 @@ class SingleItemView extends Component {
       processStatusAlert: "",
       processStatusMessage: "",
     };
-  }
-
-  componentDidMount() {
-    this.props.fetchItemById(this.props.productID);
   }
 
   add() {
@@ -198,12 +193,10 @@ class SingleItemView extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  singleItem: state.itemReducer.singleItem,
   user: state.authReducer.user,
 });
 
 const mapActionToProps = {
-  fetchItemById: actions.fetchItemById,
   addItemToCart: cartActions.addItemToCart,
 };
 

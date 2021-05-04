@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import loadingpieChart from "./img/pie_chart.png";
 import { Doughnut } from "react-chartjs-2";
-import * as actions from "../../../../actions/ItemActions";
 import { connect } from "react-redux";
 
 const EmptyPieChart = () => (
@@ -12,10 +11,6 @@ const EmptyPieChart = () => (
 );
 
 class ItemsPieChart extends Component {
-  componentDidMount() {
-    this.props.fetchAllItemsBySellarID(this.props.user.id);
-  }
-
   render() {
     return (
       <div>
@@ -67,7 +62,4 @@ const mapStateToProps = (state) => ({
   sellarItemList: state.itemReducer.sellarItemList,
 });
 
-const mapActionToProps = {
-  fetchAllItemsBySellarID: actions.fetchAllItemsBySellarID,
-};
-export default connect(mapStateToProps, mapActionToProps)(ItemsPieChart);
+export default connect(mapStateToProps, null)(ItemsPieChart);

@@ -1,12 +1,8 @@
 import React, { Component } from "react";
 import { Bar } from "react-chartjs-2";
-import * as actions from "../../../../actions/ItemActions";
 import { connect } from "react-redux";
 
 class ItemBarGraph extends Component {
-  componentDidMount() {
-    this.props.fetchStockByBrandSellar(this.props.user.id);
-  }
   render() {
     return (
       <div>
@@ -52,11 +48,7 @@ class ItemBarGraph extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  user: state.authReducer.user,
   stockBrandList: state.itemReducer.stockBrandList,
 });
 
-const mapActionToProps = {
-  fetchStockByBrandSellar: actions.fetchStockByBrandSellar,
-};
-export default connect(mapStateToProps, mapActionToProps)(ItemBarGraph);
+export default connect(mapStateToProps, null)(ItemBarGraph);

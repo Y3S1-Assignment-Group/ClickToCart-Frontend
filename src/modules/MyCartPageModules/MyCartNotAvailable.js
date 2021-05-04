@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import MyCartNotAvailableImg from "../../assets/img/MyCartPage/login.svg";
 
 export class MyCartNotAvailable extends Component {
   render() {
@@ -8,12 +7,9 @@ export class MyCartNotAvailable extends Component {
         <div className="card p-5">
           <div className="container">
             <div className="container text-center">
-              <img
-                src={MyCartNotAvailableImg}
-                alt="notAvailableCart"
-                className="img-fluid"
-              />
-              <h2 className="text-warning">Sorry ! You should login first</h2>
+              <div className="alert alert-warning" role="alert">
+                Sorry, you have to login first
+              </div>
             </div>
           </div>
         </div>
