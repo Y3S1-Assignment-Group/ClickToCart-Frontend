@@ -12,9 +12,11 @@ class Payment extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.handleToken = this.handleToken.bind(this);
     this.toggle = this.toggle.bind(this);
+    this.toggleDelivery = this.toggleDelivery.bind(this);
 
     this.state = {
       modal: false,
+      modalDelivery: false,
       processStatusAlert: "",
       processStatusMessage: "",
     };
@@ -26,11 +28,30 @@ class Payment extends React.Component {
     });
   }
 
+  toggleDelivery() {
+    this.setState({
+      modalDelivery: !this.state.modalDelivery,
+    });
+  }
+
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
   async handleToken(token) {
+    const deliveryObj = {
+      address: this.props.address,
+      phonenumber: this.props.contactno,
+      paymentdate: new Date(),
+      cusName: this.props.userName,
+      cusID: this.props.userID,
+    };
+
+    const DataObj = {
+      delivery: deliveryObj,
+      deliveryItemList: this.props.cartItemList,
+    };
+
     this.setState({
       modal: !this.state.modal,
       processStatusAlert: "alert alert-warning",
@@ -64,11 +85,30 @@ class Payment extends React.Component {
           .post(process.env.REACT_APP_BACKEND_URL + "/api/mail/send", newMail)
           .then(() => {
             this.props.getItemFromCart(this.props.userID);
+
+            this.setState({
+              modalDelivery: !this.state.modalDelivery,
+              processStatusAlert: "alert alert-warning",
+              processStatusMessage: "Processing...",
+            });
+
+            axios
+              .post(
+                process.env.REACT_APP_DELIVERY_BACKEND_URL + "/api/delivery",
+                DataObj
+              )
+              .then(() => {
+                this.setState({
+                  processStatusAlert: "alert alert-success",
+                  processStatusMessage:
+                    "Delivery information sent to the distributor ",
+                });
+              });
           });
       })
       .catch(() => {
         this.setState({
-          processStatusAlert: "alert alert-warning",
+          processStatusAlert: "alert alert-danger",
           processStatusMessage: "Something went wrong",
         });
       });
@@ -84,6 +124,16 @@ class Payment extends React.Component {
         />
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>Payment Status</ModalHeader>
+          <ModalBody>
+            <div className={this.state.processStatusAlert} role="alert">
+              {this.state.processStatusMessage}
+            </div>
+          </ModalBody>
+        </Modal>
+        <Modal isOpen={this.state.modalDelivery} toggle={this.toggleDelivery}>
+          <ModalHeader toggle={this.toggleDelivery}>
+            Delivery Status
+          </ModalHeader>
           <ModalBody>
             <div className={this.state.processStatusAlert} role="alert">
               {this.state.processStatusMessage}
