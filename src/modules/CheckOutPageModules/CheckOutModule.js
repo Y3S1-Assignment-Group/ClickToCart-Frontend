@@ -101,6 +101,7 @@ class CheckOutModule extends Component {
                   <Payment
                     cartItemList={this.props.cartList}
                     userID={this.props.user.id}
+                    userName={this.props.user.username}
                     email={
                       this.state.email !== ""
                         ? this.state.email
