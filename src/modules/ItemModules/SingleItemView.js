@@ -85,6 +85,7 @@ class SingleItemView extends Component {
                       <button
                         className="btn btn-warning btn-lg"
                         onClick={this.addItemToCartFunction}
+                        disabled={this.state.qty <= 0}
                       >
                         ADD TO CART <ShoppingCartIcon />
                       </button>
@@ -179,7 +180,10 @@ class SingleItemView extends Component {
                 <button
                   className="btn btn-warning"
                   onClick={this.add}
-                  disabled={this.state.qty >= this.props.singleItem.stock}
+                  disabled={
+                    this.state.qty >= this.props.singleItem.stock ||
+                    this.state.qty <= 0
+                  }
                 >
                   +
                 </button>
