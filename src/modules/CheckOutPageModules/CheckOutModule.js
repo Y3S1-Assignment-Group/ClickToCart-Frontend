@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Payment from "../PaymentModules/Payment";
+import PaymentMobile from "../PaymentModules/PaymentMobile";
 
 class CheckOutModule extends Component {
   constructor(props) {
@@ -98,23 +99,52 @@ class CheckOutModule extends Component {
                   )}
                 </form>
                 {this.state.payBtn ? (
-                  <Payment
-                    cartItemList={this.props.cartList}
-                    userID={this.props.user.id}
-                    userName={this.props.user.username}
-                    email={
-                      this.state.email !== ""
-                        ? this.state.email
-                        : this.props.user.email
-                    }
-                    contactno={this.state.contactno}
-                    address={this.state.address}
-                    totalAmount={this.props.cartList.reduce(
-                      (accumulator, current) =>
-                        accumulator + current.totalPrice,
-                      0
-                    )}
-                  />
+                  <div className="row" style={{ width: "100%" }}>
+                    <div
+                      className="col-mg-6 col-md-6 col-sm-6"
+                      style={{ width: "30%" }}
+                    >
+                      <Payment
+                        cartItemList={this.props.cartList}
+                        userID={this.props.user.id}
+                        userName={this.props.user.username}
+                        email={
+                          this.state.email !== ""
+                            ? this.state.email
+                            : this.props.user.email
+                        }
+                        contactno={this.state.contactno}
+                        address={this.state.address}
+                        totalAmount={this.props.cartList.reduce(
+                          (accumulator, current) =>
+                            accumulator + current.totalPrice,
+                          0
+                        )}
+                      />
+                    </div>
+                    <div
+                      className="col-mg-6 col-md-6 col-sm-6"
+                      style={{ width: "30%" }}
+                    >
+                      <PaymentMobile
+                        cartItemList={this.props.cartList}
+                        userID={this.props.user.id}
+                        userName={this.props.user.username}
+                        email={
+                          this.state.email !== ""
+                            ? this.state.email
+                            : this.props.user.email
+                        }
+                        contactno={this.state.contactno}
+                        address={this.state.address}
+                        totalAmount={this.props.cartList.reduce(
+                          (accumulator, current) =>
+                            accumulator + current.totalPrice,
+                          0
+                        )}
+                      />
+                    </div>
+                  </div>
                 ) : (
                   ""
                 )}

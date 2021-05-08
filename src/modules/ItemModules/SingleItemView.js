@@ -80,28 +80,28 @@ class SingleItemView extends Component {
               <div className="col-lg-12">
                 <div className="row mt-2 text-center">
                   <div className="col-lg-4 col-md-3 p-2"></div>
-                  <div className="col-lg-4 col-md-3 p-2">
-                    {this.props.user ? (
-                      <button
-                        className="btn btn-warning btn-lg"
-                        onClick={this.addItemToCartFunction}
-                        disabled={this.state.qty <= 0}
-                      >
-                        ADD TO CART <ShoppingCartIcon />
-                      </button>
-                    ) : (
-                      <button className="btn btn-warning btn-lg" disabled>
-                        ADD TO CART <ShoppingCartIcon />
-                      </button>
-                    )}
-                  </div>
-                  <div className="col-lg-4 col-md-3 p-2"></div>
+
                   {this.state.processStatus ? (
                     <div className={this.state.processStatusAlert} role="alert">
                       {this.state.processStatusMessage}
                     </div>
                   ) : (
-                    ""
+                    <div className="col-lg-4 col-md-3 p-2">
+                      {this.props.user ? (
+                        <button
+                          className="btn btn-warning btn-lg"
+                          onClick={this.addItemToCartFunction}
+                          disabled={this.props.singleItem.stock <= 0}
+                        >
+                          ADD TO CART <ShoppingCartIcon />
+                        </button>
+                      ) : (
+                        <button className="btn btn-warning btn-lg" disabled>
+                          ADD TO CART <ShoppingCartIcon />
+                        </button>
+                      )}
+                      <div className="col-lg-4 col-md-3 p-2"></div>
+                    </div>
                   )}
                 </div>
               </div>

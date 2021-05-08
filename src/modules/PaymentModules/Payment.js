@@ -70,7 +70,17 @@ class Payment extends React.Component {
           },
         }
       )
-      .then(() => {
+      .then(async () => {
+        const newSms = {
+          phoneNumber: "+94779142664",
+          message: `Congratulations! ${this.props.userName}. Your order has been received. Order will be received to ${this.props.address}`,
+        };
+
+        await axios.post(
+          process.env.REACT_APP_BACKEND_URL + "/api/v1/sms",
+          newSms
+        );
+
         this.setState({
           processStatusAlert: "alert alert-success",
           processStatusMessage: "Congratulations!! Payment Success",
