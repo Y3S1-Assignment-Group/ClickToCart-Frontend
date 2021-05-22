@@ -1,4 +1,5 @@
 import api from "../apis/ItemAPI";
+import axios from "axios";
 
 export const ACTION_TYPES = {
   ADD_ITEM: "ADD_ITEM",
@@ -7,11 +8,9 @@ export const ACTION_TYPES = {
   FETCH_ALL_ITEMS: "FETCH_ALL_ITEMS",
   FETCH_FILTER_ITEMS: "FETCH_FILTER_ITEMS",
   FETCH_ITEM_BY_ID: "FETCH_ITEM_BY_ID",
-    FETCH_ITEMS_BY_SELLARID: "FETCH_ITEMS_BY_SELLARID",
-    UPDATE_STOCK_SELLAR: "UPDATE_STOCK_SELLAR",
-    FETCH_ITEM_STOCK_BY_BRAND: "FETCH_ITEM_STOCK_BY_BRAND",
-
-
+  FETCH_ITEMS_BY_SELLARID: "FETCH_ITEMS_BY_SELLARID",
+  UPDATE_STOCK_SELLAR: "UPDATE_STOCK_SELLAR",
+  FETCH_ITEM_STOCK_BY_BRAND: "FETCH_ITEM_STOCK_BY_BRAND",
 };
 
 export const filterAllItems = (data) => (dispatch) => {
@@ -36,7 +35,8 @@ export const fetchAllItems = () => (dispatch) => {
 
 export const fetchItemById = (id) => (dispatch) => {
   api
-    .items().fetchById(id)
+    .items()
+    .fetchById(id)
     .then((response) => {
       dispatch({
         type: ACTION_TYPES.FETCH_ITEM_BY_ID,
@@ -46,11 +46,18 @@ export const fetchItemById = (id) => (dispatch) => {
     .catch(() => {});
 };
 
-export const addItem = (data, OnSuccess, OnFailure) => (dispatch) => {
+export const addItem = (data, email, OnSuccess, OnFailure) => (dispatch) => {
   api
     .items()
     .create(data)
     .then((response) => {
+      const newMail = {
+        to: email,
+        subject: "ClickToCart | Add Product",
+        text: `You have successfully added product into the stock`,
+      };
+
+      axios.post(process.env.REACT_APP_BACKEND_URL + "/api/mail/send", newMail);
       dispatch({
         type: ACTION_TYPES.ADD_ITEM,
         payload: response.data,
@@ -95,48 +102,44 @@ export const deleteItem = (id, OnSuccess, OnFailure) => (dispatch) => {
 };
 
 export const fetchAllItemsBySellarID = (id) => (dispatch) => {
-    api
-        .items()
-        .fetchItemsBySellarId(id)
-        .then((response) => {
-            dispatch({
-                type: ACTION_TYPES.FETCH_ITEMS_BY_SELLARID,
-                payload:  response.data ,
-            });
-        })
-        .catch(() => {
-        });
+  api
+    .items()
+    .fetchItemsBySellarId(id)
+    .then((response) => {
+      dispatch({
+        type: ACTION_TYPES.FETCH_ITEMS_BY_SELLARID,
+        payload: response.data,
+      });
+    })
+    .catch(() => {});
 };
 
-
-export const updateStockSeller = (qty,id,onSuccess,onFailure) => (dispatch) => {
+export const updateStockSeller =
+  (qty, id, onSuccess, onFailure) => (dispatch) => {
     api
-        .items()
-        .updateStockSeller(qty,id)
-        .then((response) => {
-            // dispatch({
-            //     type: ACTION_TYPES.UPDATE_STOCK_SELLAR,
-            //     payload:  response.data ,
-            // });
-            onSuccess();
-        })
-        .catch(() => {
-            onFailure();
-        });
-
-};
+      .items()
+      .updateStockSeller(qty, id)
+      .then((response) => {
+        // dispatch({
+        //     type: ACTION_TYPES.UPDATE_STOCK_SELLAR,
+        //     payload:  response.data ,
+        // });
+        onSuccess();
+      })
+      .catch(() => {
+        onFailure();
+      });
+  };
 
 export const fetchStockByBrandSellar = (id) => (dispatch) => {
-    api
-        .items()
-        .fetchitemstockbybrandforuser(id)
-        .then((response) => {
-            dispatch({
-                type: ACTION_TYPES.FETCH_ITEM_STOCK_BY_BRAND,
-                payload:  response.data ,
-            });
-        })
-        .catch(() => {
-        });
-
+  api
+    .items()
+    .fetchitemstockbybrandforuser(id)
+    .then((response) => {
+      dispatch({
+        type: ACTION_TYPES.FETCH_ITEM_STOCK_BY_BRAND,
+        payload: response.data,
+      });
+    })
+    .catch(() => {});
 };

@@ -15,6 +15,7 @@ export class MyCart extends Component {
   deleteItemFromCartFunc(id) {
     this.props.deleteItemFromCart(
       id,
+      this.props.user.email,
       () => {},
       () => {}
     );

@@ -68,6 +68,7 @@ class SellerAddItemsPage extends Component {
 
     this.props.addItem(
       newItem,
+      this.props.user.email,
       () => {
         this.setState({
           processStatusAlert: "alert alert-success",

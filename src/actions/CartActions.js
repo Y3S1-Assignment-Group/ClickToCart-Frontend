@@ -1,4 +1,5 @@
 import api from "../apis/CartAPI";
+import axios from "axios";
 
 export const ACTION_TYPES = {
   ADD_ITEM_TO_CART: "ADD_ITEM_TO_CART",
@@ -37,21 +38,32 @@ export const getItemFromCart = (id) => (dispatch) => {
     .catch(() => {});
 };
 
-export const deleteItemFromCart = (id, onSuccess, onFailure) => (dispatch) => {
-  api
-    .cartItems()
-    .deleteCartItem(id)
-    .then(() => {
-      dispatch({
-        type: ACTION_TYPES.DELETE_ITEM_FROM_CART,
-        payload: { id },
+export const deleteItemFromCart =
+  (id, email, onSuccess, onFailure) => (dispatch) => {
+    api
+      .cartItems()
+      .deleteCartItem(id)
+      .then(() => {
+        const newMail = {
+          to: email,
+          subject: "ClickToCart | Remove Item From Cart",
+          text: `Removed Item From Your Cart`,
+        };
+
+        axios.post(
+          process.env.REACT_APP_BACKEND_URL + "/api/mail/send",
+          newMail
+        );
+        dispatch({
+          type: ACTION_TYPES.DELETE_ITEM_FROM_CART,
+          payload: { id },
+        });
+        onSuccess();
+      })
+      .catch(() => {
+        onFailure();
       });
-      onSuccess();
-    })
-    .catch(() => {
-      onFailure();
-    });
-};
+  };
 
 export const getPayedItemsFromCart = (id) => (dispatch) => {
   api
