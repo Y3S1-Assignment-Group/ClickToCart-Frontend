@@ -91,6 +91,7 @@ class Payment extends React.Component {
           subject: "ClickToCart | Order Confirmation",
           text: `Congratulations! Your order has been received. Order will be received to ${this.props.address}`,
         };
+
         axios
           .post(process.env.REACT_APP_BACKEND_URL + "/api/mail/send", newMail)
           .then(() => {

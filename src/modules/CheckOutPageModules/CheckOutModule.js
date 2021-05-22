@@ -55,9 +55,6 @@ class CheckOutModule extends Component {
                       class="form-control"
                       placeholder="Enter email"
                       value={this.props.user.email}
-                      onChange={(e) => {
-                        this.setState({ email: e.target.value });
-                      }}
                     />
                   </div>
                   <div class="form-group">
