@@ -11,7 +11,7 @@ class ExploreShoppingCartList extends Component {
     return (
       <div>
         <div className="row mb-5">
-          {this.props.filterItemList.map((item) => {
+          {this.props.filterItemList.reverse().map((item) => {
             return (
               <div className="col-lg-3 col-md-4 col-sm-12 p-3 ShoppingCartSingleItemCol">
                 <Link to={`/product/${item.id}`}>

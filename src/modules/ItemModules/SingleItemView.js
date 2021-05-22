@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { connect } from "react-redux";
 import * as cartActions from "../../actions/CartActions";
+import BreadcrumbsComponent from "./Breadcrumbs";
+import "./singleitem.css";
 
 /* SingleItemView */
 class SingleItemView extends Component {
@@ -66,7 +68,10 @@ class SingleItemView extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container SingleItemDiv">
+        <div className="text-center mt-5 mb-5">
+          <BreadcrumbsComponent proid={this.props.singleItem.id} />
+        </div>
         <div className="row mt-5">
           <div className="col-lg-6">
             <div className="row">
@@ -114,61 +119,69 @@ class SingleItemView extends Component {
               </div>
               <hr />
             </div>
-            <div className="row mb-2">
-              <div className="col-lg-3 col-md-3 col-sm-3 text-muted">Brand</div>
-              <div className="col-lg-8 col-md-8 col-sm-8 text-left">
+            <div className="row mb-2 singleItemRow">
+              <div className="col-lg-3 col-md-3 col-sm-3 text-muted singleItemCol">
+                Brand
+              </div>
+              <div className="col-lg-8 col-md-8 col-sm-8 text-left singleItemCol">
                 {this.props.singleItem.brand}
               </div>
             </div>
-            <div className="row mb-2">
-              <div className="col-lg-3 col-md-3 col-sm-3 text-muted">RAM</div>
-              <div className="col-lg-8 col-md-8 col-sm-8 text-left">
+            <div className="row mb-2 singleItemRow">
+              <div className="col-lg-3 col-md-3 col-sm-3 text-muted singleItemCol">
+                RAM
+              </div>
+              <div className="col-lg-8 col-md-8 col-sm-8 text-left singleItemCol">
                 {this.props.singleItem.ram} GB
               </div>
             </div>
-            <div className="row mb-2">
-              <div className="col-lg-3 col-md-3 col-sm-3 text-muted">
+            <div className="row mb-2 singleItemRow">
+              <div className="col-lg-3 col-md-3 col-sm-3 text-muted singleItemCol">
                 Storage
               </div>
-              <div className="col-lg-8 col-md-8 col-sm-8 text-left">
+              <div className="col-lg-8 col-md-8 col-sm-8 text-left singleItemCol">
                 {this.props.singleItem.storage} GB
               </div>
             </div>
-            <div className="row mb-2">
-              <div className="col-lg-3 col-md-3 col-sm-3 text-muted">
+            <div className="row mb-2 singleItemRow">
+              <div className="col-lg-3 col-md-3 col-sm-3 text-muted singleItemCol">
                 Seller
               </div>
-              <div className="col-lg-8 col-md-8 col-sm-8 text-left">
+              <div className="col-lg-8 col-md-8 col-sm-8 text-left singleItemCol">
                 {this.props.singleItem.sellarName}
               </div>
             </div>
-            <div className="row mb-2">
-              <div className="col-lg-3 col-md-3 col-sm-3 text-muted">Price</div>
-              <div className="col-lg-8 col-md-8 col-sm-8 text-left">
+            <div className="row mb-2 singleItemRow">
+              <div className="col-lg-3 col-md-3 col-sm-3 text-muted singleItemCol">
+                Price
+              </div>
+              <div className="col-lg-8 col-md-8 col-sm-8 text-left singleItemCol">
                 {this.props.singleItem.price}
               </div>
             </div>
-            <div className="row mb-2">
-              <div className="col-lg-3 col-md-3 col-sm-3 text-muted">
+            <div className="row mb-2 singleItemRow">
+              <div className="col-lg-3 col-md-3 col-sm-3 text-muted singleItemCol">
                 Description
               </div>
-              <div className="col-lg-8 col-md-8 col-sm-8 text-left">
+              <div className="col-lg-8 col-md-8 col-sm-8 text-left singleItemCol">
                 {this.props.singleItem.description}
               </div>
             </div>
-            <div className="row mb-2">
-              <div className="col-lg-3 col-md-3 col-sm-3 text-muted">Stock</div>
-              <div className="col-lg-8 col-md-8 col-sm-8 text-left">
+            <div className="row mb-2 singleItemRow">
+              <div className="col-lg-3 col-md-3 col-sm-3 text-muted singleItemCol">
+                Stock
+              </div>
+              <div className="col-lg-8 col-md-8 col-sm-8 text-left singleItemCol">
                 <span style={{ fontWeight: "bolder" }}>
                   {this.props.singleItem.stock}
                 </span>
               </div>
             </div>
-            <div className="row mb-2">
-              <div className="col-lg-3 col-md-3 col-sm-3 text-muted">
+            <div className="row singleItemRow">
+              <div className="col-lg-3 col-md-3 col-sm-3 text-muted singleItemCol">
                 Quantity
               </div>
-              <div className="col-lg-8 col-md-8 p-2">
+              <div className="col-lg-8 col-md-8 p-2 singleItemCol">
                 <button
                   className="btn btn-warning  mr-3"
                   onClick={this.subtract}
